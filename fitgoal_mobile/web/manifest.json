@@ -1,11 +1,11 @@
 {
-    "name": "fitgoal_mobile",
-    "short_name": "fitgoal_mobile",
+    "name": "FitGoal Smart Coach",
+    "short_name": "FitGoal",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#101112",
-    "theme_color": "#FF7043",
-    "description": "A new Flutter project.",
+    "background_color": "#F4F7FC",
+    "theme_color": "#1769E0",
+    "description": "Plan workouts, track nutrition, and build healthy habits with FitGoal Smart Coach.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

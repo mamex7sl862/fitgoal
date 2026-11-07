@@ -42,7 +42,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     final authState = ref.watch(authControllerProvider);
 
     return Scaffold(
-      backgroundColor: const Color(0xFF101112),
+      backgroundColor: const Color(0xFFF4F7FC),
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24.0),
@@ -52,23 +52,50 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                Center(
+                  child: Container(
+                    padding: const EdgeInsets.all(6),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFFFFFFF),
+                      borderRadius: BorderRadius.circular(28),
+                      boxShadow: [
+                        BoxShadow(
+                          color: const Color(
+                            0xFF0B2C77,
+                          ).withValues(alpha: .12),
+                          blurRadius: 24,
+                          offset: const Offset(0, 10),
+                        ),
+                      ],
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(22),
+                      child: Image.asset(
+                        'assets/images/fitgoal_launcher.png',
+                        width: 112,
+                        height: 112,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
                 const Text(
-                  'FitGoal',
+                  'Your next level starts here',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 36,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFFFF7043),
-                    letterSpacing: 1.5,
+                    fontSize: 25,
+                    height: 1.15,
+                    fontWeight: FontWeight.w900,
+                    color: Color(0xFF0B2C77),
                   ),
                 ),
                 const SizedBox(height: 8),
                 const Text(
-                  'Smart Coach Edition',
+                  'Training and nutrition, built around you.',
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 16, color: Colors.white70),
+                  style: TextStyle(fontSize: 14, color: Color(0xFF536987)),
                 ),
-                const SizedBox(height: 48),
+                const SizedBox(height: 32),
 
                 if (authState.errorMessage != null) ...[
                   Container(
@@ -90,16 +117,16 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 TextFormField(
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Color(0xFF10264A)),
                   decoration: InputDecoration(
-                    labelText: 'Email Address',
-                    labelStyle: const TextStyle(color: Colors.white70),
+                    labelText: 'Email address',
+                    labelStyle: const TextStyle(color: Color(0xFF536987)),
                     prefixIcon: const Icon(
                       Icons.email,
-                      color: Color(0xFFFF7043),
+                      color: Color(0xFF1769E0),
                     ),
                     filled: true,
-                    fillColor: const Color(0xFF1B1D1F),
+                    fillColor: const Color(0xFFFFFFFF),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide.none,
@@ -119,16 +146,16 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 TextFormField(
                   controller: _passwordController,
                   obscureText: true,
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Color(0xFF10264A)),
                   decoration: InputDecoration(
                     labelText: 'Password',
-                    labelStyle: const TextStyle(color: Colors.white70),
+                    labelStyle: const TextStyle(color: Color(0xFF536987)),
                     prefixIcon: const Icon(
                       Icons.lock,
-                      color: Color(0xFFFF7043),
+                      color: Color(0xFF1769E0),
                     ),
                     filled: true,
-                    fillColor: const Color(0xFF1B1D1F),
+                    fillColor: const Color(0xFFFFFFFF),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide.none,
@@ -146,8 +173,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 ElevatedButton(
                   onPressed: authState.isLoading ? null : _submit,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFFFF7043),
-                    foregroundColor: Colors.black,
+                    backgroundColor: const Color(0xFF1769E0),
+                    foregroundColor: Color(0xFFFFFFFF),
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
@@ -159,7 +186,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           width: 20,
                           child: CircularProgressIndicator(
                             strokeWidth: 2,
-                            color: Colors.black,
+                            color: Color(0xFFFFFFFF),
                           ),
                         )
                       : const Text(
@@ -179,12 +206,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   child: const Text.rich(
                     TextSpan(
                       text: "Don't have an account? ",
-                      style: TextStyle(color: Colors.white70),
+                      style: TextStyle(color: Color(0xFF536987)),
                       children: [
                         TextSpan(
                           text: 'Sign Up',
                           style: TextStyle(
-                            color: Color(0xFFFF7043),
+                            color: Color(0xFF1769E0),
                             fontWeight: FontWeight.bold,
                           ),
                         ),

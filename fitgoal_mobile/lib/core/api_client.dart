@@ -65,14 +65,15 @@ class AuthInterceptor extends Interceptor {
   ) async {
     final response = err.response;
     final request = err.requestOptions;
+    // Treat both 401 and 403 as a potentially expired token worth refreshing.
+    // The backend returns 401 for missing/invalid tokens and 403 for forbidden.
+    final statusCode = response?.statusCode;
     final isExpiredToken =
-        response?.statusCode == 403 &&
-        response?.data is Map &&
-        response?.data['code'] == 'FORBIDDEN';
+        (statusCode == 401 || statusCode == 403) &&
+        !request.path.startsWith('/auth/') &&
+        request.extra['authRetry'] != true;
 
-    if (!isExpiredToken ||
-        request.path.startsWith('/auth/') ||
-        request.extra['authRetry'] == true) {
+    if (!isExpiredToken) {
       handler.next(err);
       return;
     }

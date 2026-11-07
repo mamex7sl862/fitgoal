@@ -54,6 +54,19 @@ class GoalController extends StateNotifier<GoalState> {
     }
   }
 
+  /// Force re-fetch from the API (used after workout completion so a
+  /// fitness-level promotion is immediately reflected in the UI).
+  Future<void> refreshFromServer() async {
+    try {
+      final freshGoal = await _repository.loadSavedGoal();
+      if (freshGoal != null) {
+        state = state.copyWith(calculatedGoal: freshGoal);
+      }
+    } catch (_) {
+      // Silently ignore — stale data is acceptable here.
+    }
+  }
+
   Future<bool> submitGoal({
     required int age,
     required String gender,

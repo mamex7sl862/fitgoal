@@ -54,7 +54,7 @@ class _GoalSetupScreenState extends ConsumerState<GoalSetupScreen> {
             content: Text(
               'TDEE & Macro calculations computed successfully! 🎉',
             ),
-            backgroundColor: Color(0xFFFF7043),
+            backgroundColor: Color(0xFF1769E0),
           ),
         );
         Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
@@ -68,12 +68,12 @@ class _GoalSetupScreenState extends ConsumerState<GoalSetupScreen> {
     final state = ref.watch(goalControllerProvider);
 
     return Scaffold(
-      backgroundColor: const Color(0xFF101112),
+      backgroundColor: const Color(0xFFF4F7FC),
       appBar: AppBar(
         title: const Text('Smart Coach Setup'),
         backgroundColor: Colors.transparent,
         elevation: 0,
-        foregroundColor: const Color(0xFFFF7043),
+        foregroundColor: const Color(0xFF1769E0),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20.0),
@@ -87,13 +87,13 @@ class _GoalSetupScreenState extends ConsumerState<GoalSetupScreen> {
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                  color: Color(0xFF10264A),
                 ),
               ),
               const SizedBox(height: 6),
               const Text(
                 'We will calculate your baseline TDEE and custom macro targets.',
-                style: TextStyle(color: Colors.white70, fontSize: 14),
+                style: TextStyle(color: Color(0xFF536987), fontSize: 14),
               ),
               const SizedBox(height: 24),
 
@@ -122,10 +122,10 @@ class _GoalSetupScreenState extends ConsumerState<GoalSetupScreen> {
                     child: ChoiceChip(
                       label: const Center(child: Text('Male')),
                       selected: _gender == 'MALE',
-                      selectedColor: const Color(0xFFFF7043),
-                      backgroundColor: const Color(0xFF1B1D1F),
+                      selectedColor: const Color(0xFF1769E0),
+                      backgroundColor: const Color(0xFFFFFFFF),
                       labelStyle: TextStyle(
-                        color: _gender == 'MALE' ? Colors.black : Colors.white,
+                        color: _gender == 'MALE' ? Color(0xFFFFFFFF) : Color(0xFF10264A),
                         fontWeight: FontWeight.bold,
                       ),
                       onSelected: (selected) {
@@ -138,12 +138,12 @@ class _GoalSetupScreenState extends ConsumerState<GoalSetupScreen> {
                     child: ChoiceChip(
                       label: const Center(child: Text('Female')),
                       selected: _gender == 'FEMALE',
-                      selectedColor: const Color(0xFFFF7043),
-                      backgroundColor: const Color(0xFF1B1D1F),
+                      selectedColor: const Color(0xFF1769E0),
+                      backgroundColor: const Color(0xFFFFFFFF),
                       labelStyle: TextStyle(
                         color: _gender == 'FEMALE'
-                            ? Colors.black
-                            : Colors.white,
+                            ? Color(0xFFFFFFFF)
+                            : Color(0xFF10264A),
                         fontWeight: FontWeight.bold,
                       ),
                       onSelected: (selected) {
@@ -162,7 +162,7 @@ class _GoalSetupScreenState extends ConsumerState<GoalSetupScreen> {
                     child: TextFormField(
                       controller: _ageController,
                       keyboardType: TextInputType.number,
-                      style: const TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Color(0xFF10264A)),
                       decoration: _inputDecoration('Age', 'yr'),
                       validator: (val) =>
                           val == null || val.isEmpty ? 'Required' : null,
@@ -173,7 +173,7 @@ class _GoalSetupScreenState extends ConsumerState<GoalSetupScreen> {
                     child: TextFormField(
                       controller: _heightController,
                       keyboardType: TextInputType.number,
-                      style: const TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Color(0xFF10264A)),
                       decoration: _inputDecoration('Height', 'cm'),
                       validator: (val) =>
                           val == null || val.isEmpty ? 'Required' : null,
@@ -186,7 +186,7 @@ class _GoalSetupScreenState extends ConsumerState<GoalSetupScreen> {
                       keyboardType: const TextInputType.numberWithOptions(
                         decimal: true,
                       ),
-                      style: const TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Color(0xFF10264A)),
                       decoration: _inputDecoration('Weight', 'kg'),
                       validator: (val) =>
                           val == null || val.isEmpty ? 'Required' : null,
@@ -200,7 +200,7 @@ class _GoalSetupScreenState extends ConsumerState<GoalSetupScreen> {
               const Text(
                 'Activity Level',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Color(0xFF10264A),
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
                 ),
@@ -208,11 +208,11 @@ class _GoalSetupScreenState extends ConsumerState<GoalSetupScreen> {
               const SizedBox(height: 8),
               DropdownButtonFormField<String>(
                 initialValue: _activityLevel,
-                dropdownColor: const Color(0xFF1B1D1F),
-                style: const TextStyle(color: Colors.white),
+                dropdownColor: const Color(0xFFFFFFFF),
+                style: const TextStyle(color: Color(0xFF10264A)),
                 decoration: InputDecoration(
                   filled: true,
-                  fillColor: const Color(0xFF1B1D1F),
+                  fillColor: const Color(0xFFFFFFFF),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                     borderSide: BorderSide.none,
@@ -245,7 +245,7 @@ class _GoalSetupScreenState extends ConsumerState<GoalSetupScreen> {
               const Text(
                 'Your training experience',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Color(0xFF10264A),
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
                 ),
@@ -253,7 +253,7 @@ class _GoalSetupScreenState extends ConsumerState<GoalSetupScreen> {
               const SizedBox(height: 4),
               const Text(
                 'Your coach will tailor your weekly exercises to this level and adjust it as you progress.',
-                style: TextStyle(color: Colors.white70, fontSize: 13),
+                style: TextStyle(color: Color(0xFF536987), fontSize: 13),
               ),
               const SizedBox(height: 10),
               Wrap(
@@ -263,10 +263,10 @@ class _GoalSetupScreenState extends ConsumerState<GoalSetupScreen> {
                   return ChoiceChip(
                     label: Text(_levelLabel(level)),
                     selected: selected,
-                    selectedColor: const Color(0xFFFF7043),
-                    backgroundColor: const Color(0xFF1B1D1F),
+                    selectedColor: const Color(0xFF1769E0),
+                    backgroundColor: const Color(0xFFFFFFFF),
                     labelStyle: TextStyle(
-                      color: selected ? Colors.black : Colors.white,
+                      color: selected ? Color(0xFFFFFFFF) : Color(0xFF10264A),
                       fontWeight: FontWeight.w600,
                     ),
                     onSelected: (_) => setState(() => _fitnessLevel = level),
@@ -279,7 +279,7 @@ class _GoalSetupScreenState extends ConsumerState<GoalSetupScreen> {
               const Text(
                 'Primary Goal',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Color(0xFF10264A),
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
                 ),
@@ -318,8 +318,8 @@ class _GoalSetupScreenState extends ConsumerState<GoalSetupScreen> {
               ElevatedButton(
                 onPressed: state.isLoading ? null : _submit,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFFF7043),
-                  foregroundColor: Colors.black,
+                  backgroundColor: const Color(0xFF1769E0),
+                  foregroundColor: Color(0xFFFFFFFF),
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
@@ -331,7 +331,7 @@ class _GoalSetupScreenState extends ConsumerState<GoalSetupScreen> {
                         width: 20,
                         child: CircularProgressIndicator(
                           strokeWidth: 2,
-                          color: Colors.black,
+                          color: Color(0xFFFFFFFF),
                         ),
                       )
                     : const Text(
@@ -353,10 +353,10 @@ class _GoalSetupScreenState extends ConsumerState<GoalSetupScreen> {
     return InputDecoration(
       labelText: label,
       suffixText: suffix,
-      labelStyle: const TextStyle(color: Colors.white70),
-      suffixStyle: const TextStyle(color: Colors.white38),
+      labelStyle: const TextStyle(color: Color(0xFF536987)),
+      suffixStyle: const TextStyle(color: Color(0xFF96A4B8)),
       filled: true,
-      fillColor: const Color(0xFF1B1D1F),
+      fillColor: const Color(0xFFFFFFFF),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
         borderSide: BorderSide.none,
@@ -379,10 +379,10 @@ class _GoalSetupScreenState extends ConsumerState<GoalSetupScreen> {
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: const Color(0xFF1B1D1F),
+          color: const Color(0xFFFFFFFF),
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color: isSelected ? const Color(0xFFFF7043) : Colors.transparent,
+            color: isSelected ? const Color(0xFF1769E0) : Colors.transparent,
             width: 2,
           ),
         ),
@@ -390,7 +390,7 @@ class _GoalSetupScreenState extends ConsumerState<GoalSetupScreen> {
           children: [
             Icon(
               icon,
-              color: isSelected ? const Color(0xFFFF7043) : Colors.white54,
+              color: isSelected ? const Color(0xFF1769E0) : Color(0xFF73839B),
               size: 28,
             ),
             const SizedBox(width: 16),
@@ -401,7 +401,7 @@ class _GoalSetupScreenState extends ConsumerState<GoalSetupScreen> {
                   Text(
                     title,
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Color(0xFF10264A),
                       fontWeight: isSelected
                           ? FontWeight.bold
                           : FontWeight.normal,
@@ -410,7 +410,7 @@ class _GoalSetupScreenState extends ConsumerState<GoalSetupScreen> {
                   ),
                   Text(
                     subtitle,
-                    style: const TextStyle(color: Colors.white54, fontSize: 12),
+                    style: const TextStyle(color: Color(0xFF73839B), fontSize: 12),
                   ),
                 ],
               ),

@@ -526,8 +526,18 @@ Set<int> completedPlanDaysInCurrentWeek(
   return completedDays;
 }
 
-int? nextPlannedWorkoutIndex(List<RoutineDay> routine, Set<int> completedDays) {
-  for (var index = 0; index < routine.length; index++) {
+int? nextPlannedWorkoutIndex(
+  List<RoutineDay> routine,
+  Set<int> completedDays, {
+  DateTime? now,
+}) {
+  // Start from today's weekday (0=Mon … 6=Sun) and search forward,
+  // then wrap around so the closest upcoming session is shown first.
+  final todayIndex = ((now ?? DateTime.now()).weekday - 1) % 7;
+  final length = routine.length;
+
+  for (var offset = 0; offset < length; offset++) {
+    final index = (todayIndex + offset) % length;
     final day = routine[index];
     if (!day.isRestDay &&
         day.exercises.isNotEmpty &&
@@ -535,7 +545,7 @@ int? nextPlannedWorkoutIndex(List<RoutineDay> routine, Set<int> completedDays) {
       return index;
     }
   }
-  return null;
+  return null; // all training days completed this week
 }
 
 List<WorkoutHistoryEntry> workoutsCompletedOnDate(

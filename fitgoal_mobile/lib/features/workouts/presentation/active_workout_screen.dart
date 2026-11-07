@@ -206,14 +206,17 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
           .completeSession(_session!.id);
       if (!mounted) return;
       final messenger = ScaffoldMessenger.of(context);
+      final navigator = Navigator.of(context);
       ref
         ..invalidate(weeklyRoutineProvider)
         ..invalidate(activeWorkoutProvider)
         ..invalidate(workoutHistoryProvider)
         ..invalidate(workoutCalorieProgressProvider)
-        ..invalidate(dailySummaryProvider)
-        ..invalidate(goalControllerProvider);
-      Navigator.pop(context);
+        ..invalidate(dailySummaryProvider);
+      // Re-fetch goal from server so a fitness-level promotion is
+      // immediately visible in the level progress bar.
+      await ref.read(goalControllerProvider.notifier).refreshFromServer();
+      navigator.pop();
       final completionMessage =
           completion.levelPromotionMessage ??
           completion.levelCheckMessage ??

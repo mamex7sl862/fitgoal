@@ -36,20 +36,20 @@ class _HabitLoggerScreenState extends ConsumerState<HabitLoggerScreen> {
     showDialog(
       context: context,
       builder: (dialogContext) => AlertDialog(
-        backgroundColor: const Color(0xFF1B1D1F),
+        backgroundColor: const Color(0xFFFFFFFF),
         title: const Text(
           'Log Meal / Food Item',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Color(0xFF10264A)),
         ),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             TextField(
               controller: _mealNameController,
-              style: const TextStyle(color: Colors.white),
+              style: const TextStyle(color: Color(0xFF10264A)),
               decoration: const InputDecoration(
                 labelText: 'Food Name',
-                labelStyle: TextStyle(color: Colors.white70),
+                labelStyle: TextStyle(color: Color(0xFF536987)),
               ),
             ),
             const SizedBox(height: 12),
@@ -57,10 +57,10 @@ class _HabitLoggerScreenState extends ConsumerState<HabitLoggerScreen> {
               controller: _caloriesController,
               keyboardType: TextInputType.number,
               inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-              style: const TextStyle(color: Colors.white),
+              style: const TextStyle(color: Color(0xFF10264A)),
               decoration: const InputDecoration(
                 labelText: 'Calories (kcal)',
-                labelStyle: TextStyle(color: Colors.white70),
+                labelStyle: TextStyle(color: Color(0xFF536987)),
               ),
             ),
             const SizedBox(height: 12),
@@ -68,10 +68,10 @@ class _HabitLoggerScreenState extends ConsumerState<HabitLoggerScreen> {
               controller: _proteinController,
               keyboardType: TextInputType.number,
               inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-              style: const TextStyle(color: Colors.white),
+              style: const TextStyle(color: Color(0xFF10264A)),
               decoration: const InputDecoration(
                 labelText: 'Protein (g)',
-                labelStyle: TextStyle(color: Colors.white70),
+                labelStyle: TextStyle(color: Color(0xFF536987)),
               ),
             ),
           ],
@@ -83,13 +83,13 @@ class _HabitLoggerScreenState extends ConsumerState<HabitLoggerScreen> {
             },
             child: const Text(
               'Cancel',
-              style: TextStyle(color: Colors.white54),
+              style: TextStyle(color: Color(0xFF73839B)),
             ),
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFFFF7043),
-              foregroundColor: Colors.black,
+              backgroundColor: const Color(0xFF1769E0),
+              foregroundColor: Color(0xFFFFFFFF),
             ),
             onPressed: () async {
               final name = _mealNameController.text.trim();
@@ -141,16 +141,16 @@ class _HabitLoggerScreenState extends ConsumerState<HabitLoggerScreen> {
     final summaryAsync = ref.watch(dailySummaryProvider);
 
     return Scaffold(
-      backgroundColor: const Color(0xFF101112),
+      backgroundColor: const Color(0xFFF4F7FC),
       appBar: AppBar(
-        title: const Text('Daily Habit & Calorie Logger'),
+        title: const Text('Your progress'),
         backgroundColor: Colors.transparent,
         elevation: 0,
-        foregroundColor: const Color(0xFFFF7043),
+        foregroundColor: const Color(0xFF0B2C77),
       ),
       body: summaryAsync.when(
         loading: () => const Center(
-          child: CircularProgressIndicator(color: Color(0xFFFF7043)),
+          child: CircularProgressIndicator(color: Color(0xFF1769E0)),
         ),
         error: (err, stack) => Center(
           child: Padding(
@@ -191,10 +191,10 @@ class _HabitLoggerScreenState extends ConsumerState<HabitLoggerScreen> {
                 Container(
                   padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF1B1D1F),
+                    color: const Color(0xFFFFFFFF),
                     borderRadius: BorderRadius.circular(16),
                     border: Border.all(
-                      color: const Color(0xFFFF7043).withValues(alpha: 0.3),
+                      color: const Color(0xFF1769E0).withValues(alpha: 0.3),
                     ),
                   ),
                   child: Row(
@@ -203,9 +203,9 @@ class _HabitLoggerScreenState extends ConsumerState<HabitLoggerScreen> {
                       _buildSummaryMetric(
                         'Calories Consumed',
                         '$totalCalories kcal',
-                        Colors.lightBlueAccent,
+                        Color(0xFF2580E8),
                       ),
-                      Container(height: 40, width: 1, color: Colors.white24),
+                      Container(height: 40, width: 1, color: Color(0xFFD5E0F0)),
                       _buildSummaryMetric(
                         'Protein Logged',
                         '${totalProtein}g',
@@ -225,7 +225,7 @@ class _HabitLoggerScreenState extends ConsumerState<HabitLoggerScreen> {
                 const Text(
                   'Daily Habits',
                   style: TextStyle(
-                    color: Colors.white,
+                    color: Color(0xFF10264A),
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
@@ -275,18 +275,18 @@ class _HabitLoggerScreenState extends ConsumerState<HabitLoggerScreen> {
                     const Text(
                       "Today's Meals",
                       style: TextStyle(
-                        color: Colors.white,
+                        color: Color(0xFF10264A),
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     TextButton.icon(
                       onPressed: _addMealDialog,
-                      icon: const Icon(Icons.add, color: Color(0xFFFF7043)),
+                      icon: const Icon(Icons.add, color: Color(0xFF1769E0)),
                       label: const Text(
                         'Log Meal',
                         style: TextStyle(
-                          color: Color(0xFFFF7043),
+                          color: Color(0xFF1769E0),
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -302,7 +302,7 @@ class _HabitLoggerScreenState extends ConsumerState<HabitLoggerScreen> {
                         padding: EdgeInsets.symmetric(vertical: 32),
                         child: Text(
                           'No meals logged yet today. Tap "Log Meal" to add one!',
-                          style: TextStyle(color: Colors.white54),
+                          style: TextStyle(color: Color(0xFF73839B)),
                           textAlign: TextAlign.center,
                         ),
                       )
@@ -317,7 +317,7 @@ class _HabitLoggerScreenState extends ConsumerState<HabitLoggerScreen> {
                             margin: const EdgeInsets.only(bottom: 10),
                             padding: const EdgeInsets.all(14),
                             decoration: BoxDecoration(
-                              color: const Color(0xFF1B1D1F),
+                              color: const Color(0xFFFFFFFF),
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Row(
@@ -328,7 +328,7 @@ class _HabitLoggerScreenState extends ConsumerState<HabitLoggerScreen> {
                                     children: [
                                       const Icon(
                                         Icons.restaurant,
-                                        color: Color(0xFFFF7043),
+                                        color: Color(0xFF1769E0),
                                         size: 20,
                                       ),
                                       const SizedBox(width: 12),
@@ -336,7 +336,7 @@ class _HabitLoggerScreenState extends ConsumerState<HabitLoggerScreen> {
                                         child: Text(
                                           meal['name'] as String? ?? '',
                                           style: const TextStyle(
-                                            color: Colors.white,
+                                            color: Color(0xFF10264A),
                                             fontWeight: FontWeight.w600,
                                             fontSize: 14,
                                           ),
@@ -352,14 +352,14 @@ class _HabitLoggerScreenState extends ConsumerState<HabitLoggerScreen> {
                                     Text(
                                       '${meal['calories']} kcal',
                                       style: const TextStyle(
-                                        color: Colors.white70,
+                                        color: Color(0xFF536987),
                                         fontSize: 13,
                                       ),
                                     ),
                                     Text(
                                       '${meal['protein']}g protein',
                                       style: const TextStyle(
-                                        color: Colors.white54,
+                                        color: Color(0xFF73839B),
                                         fontSize: 12,
                                       ),
                                     ),
@@ -384,7 +384,7 @@ class _HabitLoggerScreenState extends ConsumerState<HabitLoggerScreen> {
       children: [
         Text(
           title,
-          style: const TextStyle(color: Colors.white54, fontSize: 12),
+          style: const TextStyle(color: Color(0xFF73839B), fontSize: 12),
         ),
         const SizedBox(height: 4),
         Text(
@@ -421,20 +421,20 @@ class _HabitLoggerScreenState extends ConsumerState<HabitLoggerScreen> {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: Material(
-        color: const Color(0xFF1B1D1F),
+        color: const Color(0xFFFFFFFF),
         borderRadius: BorderRadius.circular(12),
         clipBehavior: Clip.antiAlias,
         child: CheckboxListTile(
           title: Text(
             title,
             style: const TextStyle(
-              color: Colors.white,
+              color: Color(0xFF10264A),
               fontWeight: FontWeight.w500,
             ),
           ),
-          secondary: Icon(icon, color: const Color(0xFFFF7043)),
-          activeColor: const Color(0xFFFF7043),
-          checkColor: Colors.black,
+          secondary: Icon(icon, color: const Color(0xFF1769E0)),
+          activeColor: const Color(0xFF1769E0),
+          checkColor: Color(0xFFFFFFFF),
           value: value,
           onChanged: onChanged,
           shape: RoundedRectangleBorder(
@@ -460,7 +460,7 @@ class _WorkoutProgressSection extends ConsumerWidget {
         const Text(
           'Workout Progress',
           style: TextStyle(
-            color: Colors.white,
+            color: Color(0xFF10264A),
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
@@ -468,7 +468,7 @@ class _WorkoutProgressSection extends ConsumerWidget {
         const SizedBox(height: 12),
         progress.when(
           loading: () => const Center(
-            child: CircularProgressIndicator(color: Color(0xFFFF7043)),
+            child: CircularProgressIndicator(color: Color(0xFF1769E0)),
           ),
           error: (error, stack) => _WorkoutProgressError(
             message: 'Could not load workout progress: $error',
@@ -477,7 +477,7 @@ class _WorkoutProgressSection extends ConsumerWidget {
           data: (value) => Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: const Color(0xFF1B1D1F),
+              color: const Color(0xFFFFFFFF),
               borderRadius: BorderRadius.circular(14),
             ),
             child: Row(
@@ -502,7 +502,7 @@ class _WorkoutProgressSection extends ConsumerWidget {
         const Text(
           'Recent Workouts',
           style: TextStyle(
-            color: Colors.white,
+            color: Color(0xFF10264A),
             fontSize: 18,
             fontWeight: FontWeight.bold,
           ),
@@ -510,7 +510,7 @@ class _WorkoutProgressSection extends ConsumerWidget {
         const SizedBox(height: 8),
         history.when(
           loading: () => const Center(
-            child: CircularProgressIndicator(color: Color(0xFFFF7043)),
+            child: CircularProgressIndicator(color: Color(0xFF1769E0)),
           ),
           error: (error, stack) => _WorkoutProgressError(
             message: 'Could not load workout history: $error',
@@ -521,7 +521,7 @@ class _WorkoutProgressSection extends ConsumerWidget {
                   padding: EdgeInsets.symmetric(vertical: 20),
                   child: Text(
                     'Completed workouts will appear here.',
-                    style: TextStyle(color: Colors.white54),
+                    style: TextStyle(color: Color(0xFF73839B)),
                     textAlign: TextAlign.center,
                   ),
                 )
@@ -534,14 +534,14 @@ class _WorkoutProgressSection extends ConsumerWidget {
                       margin: const EdgeInsets.only(bottom: 8),
                       padding: const EdgeInsets.all(14),
                       decoration: BoxDecoration(
-                        color: const Color(0xFF1B1D1F),
+                        color: const Color(0xFFFFFFFF),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Row(
                         children: [
                           const Icon(
                             Icons.fitness_center,
-                            color: Color(0xFFFF7043),
+                            color: Color(0xFF1769E0),
                           ),
                           const SizedBox(width: 12),
                           Expanded(
@@ -552,7 +552,7 @@ class _WorkoutProgressSection extends ConsumerWidget {
                                   DateFormat('EEE, MMM d · h:mm a')
                                       .format(entry.completedAt.toLocal()),
                                   style: const TextStyle(
-                                    color: Colors.white,
+                                    color: Color(0xFF10264A),
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
@@ -562,7 +562,7 @@ class _WorkoutProgressSection extends ConsumerWidget {
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                   style: const TextStyle(
-                                    color: Colors.white54,
+                                    color: Color(0xFF73839B),
                                     fontSize: 12,
                                   ),
                                 ),
@@ -573,7 +573,7 @@ class _WorkoutProgressSection extends ConsumerWidget {
                           Text(
                             '${entry.caloriesBurned} kcal',
                             style: const TextStyle(
-                              color: Color(0xFFFFB199),
+                              color: Color(0xFF1769E0),
                               fontWeight: FontWeight.w700,
                             ),
                           ),
@@ -602,7 +602,7 @@ class _WorkoutMetric extends StatelessWidget {
           value,
           textAlign: TextAlign.center,
           style: const TextStyle(
-            color: Color(0xFFFFB199),
+            color: Color(0xFF1769E0),
             fontSize: 16,
             fontWeight: FontWeight.bold,
           ),
@@ -611,7 +611,7 @@ class _WorkoutMetric extends StatelessWidget {
         Text(
           label,
           textAlign: TextAlign.center,
-          style: const TextStyle(color: Colors.white54, fontSize: 11),
+          style: const TextStyle(color: Color(0xFF73839B), fontSize: 11),
         ),
       ],
     ),
@@ -636,7 +636,7 @@ class _WorkoutProgressError extends StatelessWidget {
       IconButton(
         tooltip: 'Retry',
         onPressed: onRetry,
-        icon: const Icon(Icons.refresh, color: Color(0xFFFF7043)),
+        icon: const Icon(Icons.refresh, color: Color(0xFF1769E0)),
       ),
     ],
   );

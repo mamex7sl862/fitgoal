@@ -140,11 +140,11 @@ class _ExerciseLibraryScreenState extends ConsumerState<ExerciseLibraryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF101112),
+      backgroundColor: const Color(0xFFF4F7FC),
       appBar: AppBar(
         title: const Text('Exercise Library'),
         backgroundColor: Colors.transparent,
-        foregroundColor: const Color(0xFFFF7043),
+        foregroundColor: const Color(0xFF1769E0),
       ),
       body: Column(
         children: [
@@ -153,7 +153,7 @@ class _ExerciseLibraryScreenState extends ConsumerState<ExerciseLibraryScreen> {
             child: TextField(
               controller: _searchController,
               onChanged: (_) => _scheduleSearch(),
-              style: const TextStyle(color: Colors.white),
+              style: const TextStyle(color: Color(0xFF10264A)),
               decoration: InputDecoration(
                 hintText: 'Search exercises',
                 prefixIcon: const Icon(Icons.search),
@@ -166,7 +166,7 @@ class _ExerciseLibraryScreenState extends ConsumerState<ExerciseLibraryScreen> {
                   icon: const Icon(Icons.clear),
                 ),
                 filled: true,
-                fillColor: const Color(0xFF1B1D1F),
+                fillColor: const Color(0xFFFFFFFF),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide.none,
@@ -194,7 +194,7 @@ class _ExerciseLibraryScreenState extends ConsumerState<ExerciseLibraryScreen> {
               alignment: Alignment.centerLeft,
               child: Text(
                 '$_total exercises',
-                style: const TextStyle(color: Colors.white54, fontSize: 12),
+                style: const TextStyle(color: Color(0xFF73839B), fontSize: 12),
               ),
             ),
           ),
@@ -209,13 +209,13 @@ class _ExerciseLibraryScreenState extends ConsumerState<ExerciseLibraryScreen> {
           Expanded(
             child: _exercises.isEmpty && _isLoading
                 ? const Center(
-                    child: CircularProgressIndicator(color: Color(0xFFFF7043)),
+                    child: CircularProgressIndicator(color: Color(0xFF1769E0)),
                   )
                 : _exercises.isEmpty
                 ? const Center(
                     child: Text(
                       'No exercises match these filters.',
-                      style: TextStyle(color: Colors.white70),
+                      style: TextStyle(color: Color(0xFF536987)),
                     ),
                   )
                 : ListView.builder(
@@ -227,7 +227,7 @@ class _ExerciseLibraryScreenState extends ConsumerState<ExerciseLibraryScreen> {
                           padding: EdgeInsets.all(16),
                           child: Center(
                             child: CircularProgressIndicator(
-                              color: Color(0xFFFF7043),
+                              color: Color(0xFF1769E0),
                             ),
                           ),
                         );
@@ -243,7 +243,7 @@ class _ExerciseLibraryScreenState extends ConsumerState<ExerciseLibraryScreen> {
                           .read(workoutRepositoryProvider)
                           .mediaUrlFor(exercise);
                       return Card(
-                        color: const Color(0xFF1B1D1F),
+                        color: const Color(0xFFFFFFFF),
                         margin: const EdgeInsets.symmetric(
                           horizontal: 12,
                           vertical: 4,
@@ -268,7 +268,7 @@ class _ExerciseLibraryScreenState extends ConsumerState<ExerciseLibraryScreen> {
                                           child: Center(
                                             child: CircularProgressIndicator(
                                               strokeWidth: 2,
-                                              color: Color(0xFFFF7043),
+                                              color: Color(0xFF1769E0),
                                             ),
                                           ),
                                         ),
@@ -277,7 +277,7 @@ class _ExerciseLibraryScreenState extends ConsumerState<ExerciseLibraryScreen> {
                                     height: 76,
                                     child: Icon(
                                       Icons.image_not_supported_outlined,
-                                      color: Colors.white54,
+                                      color: Color(0xFF73839B),
                                     ),
                                   ),
                                 ),
@@ -287,14 +287,14 @@ class _ExerciseLibraryScreenState extends ConsumerState<ExerciseLibraryScreen> {
                               child: ListTile(
                                 title: Text(
                                   exercise.name,
-                                  style: const TextStyle(color: Colors.white),
+                                  style: const TextStyle(color: Color(0xFF10264A)),
                                 ),
                                 subtitle: Text(
                                   alreadyInPlan
                                       ? 'Already in this day’s plan'
                                       : '${exercise.targetMuscle} · ${exercise.equipmentRequired.map(_displayName).join(', ')}',
                                   style: const TextStyle(
-                                    color: Colors.white54,
+                                    color: Color(0xFF73839B),
                                     fontSize: 12,
                                   ),
                                 ),
@@ -309,8 +309,8 @@ class _ExerciseLibraryScreenState extends ConsumerState<ExerciseLibraryScreen> {
                             ),
                             Checkbox(
                               value: selected,
-                              activeColor: const Color(0xFFFF7043),
-                              checkColor: Colors.black,
+                              activeColor: const Color(0xFF1769E0),
+                              checkColor: Color(0xFFFFFFFF),
                               onChanged: alreadyInPlan
                                   ? null
                                   : (checked) => setState(() {
@@ -385,7 +385,7 @@ class _ExerciseLibraryScreenState extends ConsumerState<ExerciseLibraryScreen> {
           Center(
             child: Text(
               '$title: ',
-              style: const TextStyle(color: Colors.white70, fontSize: 12),
+              style: const TextStyle(color: Color(0xFF536987), fontSize: 12),
             ),
           ),
           ...options.map(

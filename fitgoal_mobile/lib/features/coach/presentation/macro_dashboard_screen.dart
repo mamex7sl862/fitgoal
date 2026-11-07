@@ -14,15 +14,15 @@ class MacroDashboardScreen extends ConsumerWidget {
     if (goal == null) {
       if (goalState.isRestoring) {
         return const Scaffold(
-          backgroundColor: Color(0xFF101112),
+          backgroundColor: Color(0xFFF4F7FC),
           body: Center(
-            child: CircularProgressIndicator(color: Color(0xFFFF7043)),
+            child: CircularProgressIndicator(color: Color(0xFF1769E0)),
           ),
         );
       }
 
       return Scaffold(
-        backgroundColor: const Color(0xFF101112),
+        backgroundColor: const Color(0xFFF4F7FC),
         appBar: AppBar(
           title: const Text('Your Fitness Targets'),
           backgroundColor: Colors.transparent,
@@ -36,7 +36,7 @@ class MacroDashboardScreen extends ConsumerWidget {
               children: [
                 Text(
                   goalState.errorMessage ?? 'No calculated goals found. Please complete your Smart Coach Setup first.',
-                  style: const TextStyle(color: Colors.white70, fontSize: 16),
+                  style: const TextStyle(color: Color(0xFF536987), fontSize: 16),
                   textAlign: TextAlign.center,
                 ),
                 if (goalState.errorMessage == null) ...[
@@ -67,12 +67,12 @@ class MacroDashboardScreen extends ConsumerWidget {
     }
 
     return Scaffold(
-      backgroundColor: const Color(0xFF101112),
+      backgroundColor: const Color(0xFFF4F7FC),
       appBar: AppBar(
         title: const Text('Smart Coach Plan'),
         backgroundColor: Colors.transparent,
         elevation: 0,
-        foregroundColor: const Color(0xFFFF7043),
+        foregroundColor: const Color(0xFF1769E0),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20.0),
@@ -84,14 +84,14 @@ class MacroDashboardScreen extends ConsumerWidget {
               padding: const EdgeInsets.all(24.0),
               decoration: BoxDecoration(
                 gradient: const LinearGradient(
-                  colors: [Color(0xFFFF7043), Color(0xFFFFA06A)],
+                  colors: [Color(0xFF1769E0), Color(0xFF55A8FA)],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(
-                    color: const Color(0xFFFF7043).withValues(alpha: 0.3),
+                    color: const Color(0xFF1769E0).withValues(alpha: 0.3),
                     blurRadius: 12,
                     offset: const Offset(0, 6),
                   ),
@@ -102,7 +102,7 @@ class MacroDashboardScreen extends ConsumerWidget {
                   const Text(
                     'DAILY CALORIE TARGET',
                     style: TextStyle(
-                      color: Colors.black87,
+                      color: Color(0xFF10264A),
                       fontWeight: FontWeight.bold,
                       fontSize: 14,
                       letterSpacing: 1.2,
@@ -112,7 +112,7 @@ class MacroDashboardScreen extends ConsumerWidget {
                   Text(
                     '${goal.targetCalories.toStringAsFixed(0)} kcal',
                     style: const TextStyle(
-                      color: Colors.black,
+                      color: Color(0xFFFFFFFF),
                       fontWeight: FontWeight.w900,
                       fontSize: 42,
                     ),
@@ -121,7 +121,7 @@ class MacroDashboardScreen extends ConsumerWidget {
                   Text(
                     'Goal: ${goal.goal.replaceAll('_', ' ')}',
                     style: const TextStyle(
-                      color: Colors.black87,
+                      color: Color(0xFF10264A),
                       fontWeight: FontWeight.w600,
                       fontSize: 14,
                     ),
@@ -140,7 +140,7 @@ class MacroDashboardScreen extends ConsumerWidget {
                     '${goal.bmr.toStringAsFixed(0)} kcal',
                     'BMR (At Rest)',
                     Icons.nightlight_round,
-                    Colors.orangeAccent,
+                    Color(0xFF1769E0),
                   ),
                 ),
                 const SizedBox(width: 12),
@@ -150,7 +150,7 @@ class MacroDashboardScreen extends ConsumerWidget {
                     '${goal.tdee.toStringAsFixed(0)} kcal',
                     'TDEE (Active)',
                     Icons.bolt,
-                    Colors.lightBlueAccent,
+                    Color(0xFF2580E8),
                   ),
                 ),
               ],
@@ -161,7 +161,7 @@ class MacroDashboardScreen extends ConsumerWidget {
             const Text(
               'Daily Macronutrients',
               style: TextStyle(
-                color: Colors.white,
+                color: Color(0xFF10264A),
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
@@ -193,7 +193,7 @@ class MacroDashboardScreen extends ConsumerWidget {
               'Fats',
               '${goal.fatsGrams.toStringAsFixed(0)}g',
               '20% of intake',
-              const Color(0xFFFF7043),
+              const Color(0xFF1769E0),
               Icons.water_drop,
             ),
             const SizedBox(height: 32),
@@ -204,8 +204,8 @@ class MacroDashboardScreen extends ConsumerWidget {
                 Navigator.pushNamed(context, '/meal-planner');
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFFFF7043),
-                foregroundColor: Colors.black,
+                backgroundColor: const Color(0xFF1769E0),
+                foregroundColor: Color(0xFFFFFFFF),
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
@@ -232,7 +232,7 @@ class MacroDashboardScreen extends ConsumerWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color(0xFF1B1D1F),
+        color: const Color(0xFFFFFFFF),
         borderRadius: BorderRadius.circular(16),
       ),
       child: Column(
@@ -243,7 +243,7 @@ class MacroDashboardScreen extends ConsumerWidget {
           Text(
             value,
             style: const TextStyle(
-              color: Colors.white,
+              color: Color(0xFF10264A),
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
@@ -251,7 +251,7 @@ class MacroDashboardScreen extends ConsumerWidget {
           const SizedBox(height: 4),
           Text(
             subtitle,
-            style: const TextStyle(color: Colors.white54, fontSize: 12),
+            style: const TextStyle(color: Color(0xFF73839B), fontSize: 12),
           ),
         ],
       ),
@@ -268,7 +268,7 @@ class MacroDashboardScreen extends ConsumerWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color(0xFF1B1D1F),
+        color: const Color(0xFFFFFFFF),
         borderRadius: BorderRadius.circular(16),
       ),
       child: Row(
@@ -289,14 +289,14 @@ class MacroDashboardScreen extends ConsumerWidget {
                 Text(
                   title,
                   style: const TextStyle(
-                    color: Colors.white,
+                    color: Color(0xFF10264A),
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
                   ),
                 ),
                 Text(
                   percentage,
-                  style: const TextStyle(color: Colors.white54, fontSize: 12),
+                  style: const TextStyle(color: Color(0xFF73839B), fontSize: 12),
                 ),
               ],
             ),

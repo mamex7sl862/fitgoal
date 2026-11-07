@@ -27,55 +27,83 @@ class FitGoalApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: true,
-        brightness: Brightness.dark,
-        scaffoldBackgroundColor: const Color(0xFF101112),
-        colorScheme: const ColorScheme.dark(
-          primary: Color(0xFFFF7043),
-          secondary: Color(0xFFFFA06A),
-          surface: Color(0xFF1B1D1F),
+        brightness: Brightness.light,
+        scaffoldBackgroundColor: const Color(0xFFF4F7FC),
+        colorScheme: const ColorScheme.light(
+          primary: Color(0xFF1769E0),
+          secondary: Color(0xFF55A8FA),
+          surface: Color(0xFFFFFFFF),
+          onPrimary: Color(0xFFFFFFFF),
+          onSecondary: Color(0xFF10264A),
+          onSurface: Color(0xFF10264A),
           error: Color(0xFFFF6B6B),
         ),
         appBarTheme: const AppBarTheme(
-          backgroundColor: Color(0xFF101112),
-          foregroundColor: Colors.white,
+          backgroundColor: Color(0xFFF4F7FC),
+          foregroundColor: Color(0xFF10264A),
+          surfaceTintColor: Colors.transparent,
           elevation: 0,
           centerTitle: false,
           titleTextStyle: TextStyle(
-            color: Colors.white,
+            color: Color(0xFF10264A),
             fontSize: 20,
             fontWeight: FontWeight.w800,
           ),
         ),
         cardTheme: CardThemeData(
-          color: const Color(0xFF1B1D1F),
+          color: const Color(0xFFFFFFFF),
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
-            side: const BorderSide(color: Color(0x14FFFFFF)),
+            side: const BorderSide(color: Color(0x14244477)),
           ),
         ),
         inputDecorationTheme: InputDecorationTheme(
           filled: true,
-          fillColor: const Color(0xFF1B1D1F),
+          fillColor: const Color(0xFFEAF2FF),
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(14),
-            borderSide: const BorderSide(color: Color(0x22FFFFFF)),
+            borderRadius: BorderRadius.circular(16),
+            borderSide: BorderSide.none,
           ),
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(14),
-            borderSide: const BorderSide(color: Color(0x22FFFFFF)),
+            borderRadius: BorderRadius.circular(16),
+            borderSide: const BorderSide(color: Color(0xFFD8E5F5)),
           ),
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(14),
-            borderSide: const BorderSide(color: Color(0xFFFF7043), width: 1.5),
+            borderRadius: BorderRadius.circular(16),
+            borderSide: const BorderSide(color: Color(0xFF1769E0), width: 2),
+          ),
+        ),
+        filledButtonTheme: FilledButtonThemeData(
+          style: FilledButton.styleFrom(
+            backgroundColor: const Color(0xFF1769E0),
+            foregroundColor: const Color(0xFFFFFFFF),
+            minimumSize: const Size(0, 52),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
           ),
         ),
         snackBarTheme: const SnackBarThemeData(
           behavior: SnackBarBehavior.floating,
-          backgroundColor: Color(0xFF292B2D),
+          backgroundColor: Color(0xFF0B2C77),
+          contentTextStyle: TextStyle(color: Color(0xFFFFFFFF)),
+        ),
+        navigationBarTheme: const NavigationBarThemeData(
+          backgroundColor: Color(0xFFFFFFFF),
+          indicatorColor: Color(0xFFDCEBFF),
+          surfaceTintColor: Colors.transparent,
+          elevation: 0,
+          labelTextStyle: WidgetStatePropertyAll(
+            TextStyle(fontSize: 11, fontWeight: FontWeight.w700),
+          ),
         ),
         progressIndicatorTheme: const ProgressIndicatorThemeData(
-          color: Color(0xFFFF7043),
+          color: Color(0xFF1769E0),
+        ),
+        checkboxTheme: CheckboxThemeData(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+          side: const BorderSide(color: Color(0xFF9AB0CE)),
         ),
       ),
       initialRoute: '/',

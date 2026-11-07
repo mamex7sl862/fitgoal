@@ -166,15 +166,15 @@ class _MealPlannerScreenState extends ConsumerState<MealPlannerScreen> {
     final goal = ref.watch(goalControllerProvider).calculatedGoal;
 
     return Scaffold(
-      backgroundColor: const Color(0xFF101112),
+      backgroundColor: const Color(0xFFF4F7FC),
       appBar: AppBar(
         title: const Text('Today’s Meal Plan'),
         backgroundColor: Colors.transparent,
-        foregroundColor: const Color(0xFFFF7043),
+        foregroundColor: const Color(0xFF1769E0),
       ),
       body: plan.when(
         loading: () => const Center(
-          child: CircularProgressIndicator(color: Color(0xFFFF7043)),
+          child: CircularProgressIndicator(color: Color(0xFF1769E0)),
         ),
         error: (error, stack) => Center(
           child: Padding(
@@ -197,7 +197,7 @@ class _MealPlannerScreenState extends ConsumerState<MealPlannerScreen> {
           ),
         ),
         data: (dailyPlan) => RefreshIndicator(
-          color: const Color(0xFFFF7043),
+          color: const Color(0xFF1769E0),
           onRefresh: () async => ref.invalidate(dailyMealPlanProvider),
           child: ListView(
             padding: const EdgeInsets.all(18),
@@ -205,7 +205,7 @@ class _MealPlannerScreenState extends ConsumerState<MealPlannerScreen> {
               Text(
                 DateFormat('EEEE, MMMM d').format(dailyPlan.planDate.toLocal()),
                 style: const TextStyle(
-                  color: Colors.white54,
+                  color: Color(0xFF73839B),
                   fontSize: 12,
                   fontWeight: FontWeight.w700,
                   letterSpacing: 1.1,
@@ -222,7 +222,7 @@ class _MealPlannerScreenState extends ConsumerState<MealPlannerScreen> {
               const Text(
                 'YOUR MEALS',
                 style: TextStyle(
-                  color: Color(0xFFFFB199),
+                  color: Color(0xFF1769E0),
                   fontSize: 12,
                   fontWeight: FontWeight.w800,
                   letterSpacing: 1.2,
@@ -240,7 +240,7 @@ class _MealPlannerScreenState extends ConsumerState<MealPlannerScreen> {
               const SizedBox(height: 8),
               const Text(
                 'Meal ideas and per-meal macros are estimates based on your saved daily targets. Review ingredients for allergies or dietary needs, and consult a qualified professional for medical nutrition advice.',
-                style: TextStyle(color: Colors.white54, fontSize: 12),
+                style: TextStyle(color: Color(0xFF73839B), fontSize: 12),
               ),
               const SizedBox(height: 24),
               const _MealHistorySection(),
@@ -278,7 +278,7 @@ class _MealHistorySection extends ConsumerWidget {
         const Text(
           'MEAL HISTORY',
           style: TextStyle(
-            color: Color(0xFFFFB199),
+            color: Color(0xFF1769E0),
             fontSize: 12,
             fontWeight: FontWeight.w800,
             letterSpacing: 1.2,
@@ -287,7 +287,7 @@ class _MealHistorySection extends ConsumerWidget {
         const SizedBox(height: 10),
         history.when(
           loading: () =>
-              const LinearProgressIndicator(color: Color(0xFFFF7043)),
+              const LinearProgressIndicator(color: Color(0xFF1769E0)),
           error: (error, stack) => Text(
             'Could not load meal history: ${error.toString().replaceFirst('Exception: ', '')}',
             style: const TextStyle(color: Colors.redAccent, fontSize: 12),
@@ -296,7 +296,7 @@ class _MealHistorySection extends ConsumerWidget {
             if (entries.isEmpty) {
               return const Text(
                 'Meals you mark as eaten will appear here.',
-                style: TextStyle(color: Colors.white54, fontSize: 12),
+                style: TextStyle(color: Color(0xFF73839B), fontSize: 12),
               );
             }
             final grouped = <DateTime, List<MealHistoryEntry>>{};
@@ -314,15 +314,15 @@ class _MealHistorySection extends ConsumerWidget {
                   (total, meal) => total + meal.calories,
                 );
                 return Card(
-                  color: const Color(0xFF1B1D1F),
+                  color: const Color(0xFFFFFFFF),
                   child: ExpansionTile(
                     title: Text(
                       DateFormat('EEE, MMM d').format(date),
-                      style: const TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Color(0xFF10264A)),
                     ),
                     subtitle: Text(
                       '$calories kcal · ${meals.length} meals',
-                      style: const TextStyle(color: Colors.white60),
+                      style: const TextStyle(color: Color(0xFF657894)),
                     ),
                     children: meals
                         .map(
@@ -330,19 +330,19 @@ class _MealHistorySection extends ConsumerWidget {
                             dense: true,
                             title: Text(
                               meal.name,
-                              style: const TextStyle(color: Colors.white70),
+                              style: const TextStyle(color: Color(0xFF536987)),
                             ),
                             subtitle: Text(
                               '${DateFormat('h:mm a').format(meal.loggedAt.toLocal())} · P ${meal.protein}g · C ${meal.carbs}g · F ${meal.fats}g',
                               style: const TextStyle(
-                                color: Colors.white54,
+                                color: Color(0xFF73839B),
                                 fontSize: 11,
                               ),
                             ),
                             trailing: Text(
                               '${meal.calories} kcal',
                               style: const TextStyle(
-                                color: Color(0xFFFF7043),
+                                color: Color(0xFF1769E0),
                                 fontSize: 12,
                               ),
                             ),
@@ -381,10 +381,10 @@ class _DailyTargetsCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
-        color: const Color(0xFF1B1D1F),
+        color: const Color(0xFFFFFFFF),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: const Color(0xFFFF7043).withValues(alpha: .3),
+          color: const Color(0xFF1769E0).withValues(alpha: .3),
         ),
       ),
       child: Column(
@@ -393,7 +393,7 @@ class _DailyTargetsCard extends StatelessWidget {
           Text(
             '${plan.eatenCalories} / ${plan.targetCalories} kcal',
             style: const TextStyle(
-              color: Colors.white,
+              color: Color(0xFF10264A),
               fontSize: 22,
               fontWeight: FontWeight.bold,
             ),
@@ -404,8 +404,8 @@ class _DailyTargetsCard extends StatelessWidget {
             child: LinearProgressIndicator(
               value: progress,
               minHeight: 8,
-              backgroundColor: Colors.white12,
-              color: const Color(0xFFFF7043),
+              backgroundColor: Color(0xFFDFE8F4),
+              color: const Color(0xFF1769E0),
             ),
           ),
           const SizedBox(height: 12),
@@ -433,7 +433,7 @@ class _DailyTargetsCard extends StatelessWidget {
           const SizedBox(height: 8),
           const Text(
             'Log what you actually ate to update your daily food totals.',
-            style: TextStyle(color: Colors.white54, fontSize: 12),
+            style: TextStyle(color: Color(0xFF73839B), fontSize: 12),
           ),
         ],
       ),
@@ -455,7 +455,7 @@ class _MacroTotal extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Text(
     '$name ${eaten.round()} / ${target}g',
-    style: const TextStyle(color: Colors.white70, fontSize: 12),
+    style: const TextStyle(color: Color(0xFF536987), fontSize: 12),
   );
 }
 
@@ -479,16 +479,16 @@ class _MealCard extends StatelessWidget {
         ? 'Meal'
         : '${type[0].toUpperCase()}${type.substring(1)}';
     return Card(
-      color: const Color(0xFF1B1D1F),
+      color: const Color(0xFFFFFFFF),
       margin: const EdgeInsets.only(bottom: 10),
       child: ExpansionTile(
         key: PageStorageKey(meal.id),
-        iconColor: const Color(0xFFFF7043),
-        collapsedIconColor: Colors.white54,
+        iconColor: const Color(0xFF1769E0),
+        collapsedIconColor: Color(0xFF73839B),
         title: Text(
           meal.title,
           style: const TextStyle(
-            color: Colors.white,
+            color: Color(0xFF10264A),
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -496,7 +496,7 @@ class _MealCard extends StatelessWidget {
           meal.eaten
               ? '$label · Ate ${meal.consumedCalories} kcal · P ${meal.consumedProtein.round()}g  C ${meal.consumedCarbs.round()}g  F ${meal.consumedFats.round()}g'
               : '$label · Planned ${meal.calories} kcal · P ${meal.protein.round()}g  C ${meal.carbs.round()}g  F ${meal.fats.round()}g',
-          style: const TextStyle(color: Colors.white60, fontSize: 12),
+          style: const TextStyle(color: Color(0xFF657894), fontSize: 12),
         ),
         childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 14),
         children: [
@@ -504,7 +504,7 @@ class _MealCard extends StatelessWidget {
             alignment: Alignment.centerLeft,
             child: Text(
               meal.recipe,
-              style: const TextStyle(color: Colors.white70, height: 1.4),
+              style: const TextStyle(color: Color(0xFF536987), height: 1.4),
             ),
           ),
           const SizedBox(height: 10),

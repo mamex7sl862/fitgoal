@@ -25,12 +25,12 @@ class ProfileScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      backgroundColor: const Color(0xFF101112),
+      backgroundColor: const Color(0xFFF4F7FC),
       appBar: AppBar(
         title: const Text('Profile & Settings'),
         backgroundColor: Colors.transparent,
         elevation: 0,
-        foregroundColor: const Color(0xFFFF7043),
+        foregroundColor: const Color(0xFF1769E0),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20.0),
@@ -41,15 +41,15 @@ class ProfileScreen extends ConsumerWidget {
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: const Color(0xFF1B1D1F),
+                color: const Color(0xFFFFFFFF),
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Row(
                 children: [
                   const CircleAvatar(
                     radius: 32,
-                    backgroundColor: Color(0xFFFF7043),
-                    child: Icon(Icons.person, size: 36, color: Colors.black),
+                    backgroundColor: Color(0xFF1769E0),
+                    child: Icon(Icons.person, size: 36, color: Color(0xFFFFFFFF)),
                   ),
                   const SizedBox(width: 16),
                   Expanded(
@@ -59,7 +59,7 @@ class ProfileScreen extends ConsumerWidget {
                         Text(
                           'FitGoal Member',
                           style: TextStyle(
-                            color: Colors.white,
+                            color: Color(0xFF10264A),
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
@@ -67,7 +67,7 @@ class ProfileScreen extends ConsumerWidget {
                         SizedBox(height: 4),
                         Text(
                           'member@fitgoal.app',
-                          style: TextStyle(color: Colors.white54, fontSize: 14),
+                          style: TextStyle(color: Color(0xFF73839B), fontSize: 14),
                         ),
                       ],
                     ),
@@ -80,7 +80,7 @@ class ProfileScreen extends ConsumerWidget {
             const Text(
               'Quick access',
               style: TextStyle(
-                color: Colors.white,
+                color: Color(0xFF10264A),
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
@@ -136,7 +136,7 @@ class ProfileScreen extends ConsumerWidget {
             const Text(
               'Preferences',
               style: TextStyle(
-                color: Colors.white,
+                color: Color(0xFF10264A),
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
@@ -215,25 +215,25 @@ class ProfileScreen extends ConsumerWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: Material(
-        color: const Color(0xFF1B1D1F),
+        color: const Color(0xFFFFFFFF),
         borderRadius: BorderRadius.circular(12),
         clipBehavior: Clip.antiAlias,
         child: ListTile(
-          leading: Icon(icon, color: const Color(0xFFFF7043)),
+          leading: Icon(icon, color: const Color(0xFF1769E0)),
           title: Text(
             title,
             style: const TextStyle(
-              color: Colors.white,
+              color: Color(0xFF10264A),
               fontWeight: FontWeight.w600,
             ),
           ),
           subtitle: Text(
             subtitle,
-            style: const TextStyle(color: Colors.white54, fontSize: 12),
+            style: const TextStyle(color: Color(0xFF73839B), fontSize: 12),
           ),
           trailing: const Icon(
             Icons.arrow_forward_ios,
-            color: Colors.white24,
+            color: Color(0xFFD5E0F0),
             size: 16,
           ),
           onTap: onTap,

@@ -337,10 +337,10 @@ class _ExerciseDemoScreenState extends ConsumerState<ExerciseDemoScreen> {
     final exercise = widget.exercise;
     final mediaUrl = ref.read(workoutRepositoryProvider).mediaUrlFor(exercise);
     return Scaffold(
-      backgroundColor: const Color(0xFF101112),
+      backgroundColor: const Color(0xFFF4F7FC),
       appBar: AppBar(
         title: Text(exercise.name),
-        foregroundColor: const Color(0xFFFF7043),
+        foregroundColor: const Color(0xFF1769E0),
         backgroundColor: Colors.transparent,
       ),
       body: ListView(
@@ -354,7 +354,7 @@ class _ExerciseDemoScreenState extends ConsumerState<ExerciseDemoScreen> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(16),
                   child: DecoratedBox(
-                    decoration: const BoxDecoration(color: Color(0xFF1B1D1F)),
+                    decoration: const BoxDecoration(color: Color(0xFFFFFFFF)),
                     child: Image.network(
                       '$mediaUrl?retry=$_mediaRetry',
                       fit: BoxFit.contain,
@@ -362,7 +362,7 @@ class _ExerciseDemoScreenState extends ConsumerState<ExerciseDemoScreen> {
                         if (progress == null) return child;
                         return const Center(
                           child: CircularProgressIndicator(
-                            color: Color(0xFFFF7043),
+                            color: Color(0xFF1769E0),
                           ),
                         );
                       },
@@ -372,14 +372,14 @@ class _ExerciseDemoScreenState extends ConsumerState<ExerciseDemoScreen> {
                           children: [
                             const Icon(
                               Icons.image_not_supported_outlined,
-                              color: Colors.white54,
+                              color: Color(0xFF73839B),
                               size: 48,
                             ),
                             const SizedBox(height: 8),
                             const Text(
                               'Animation is temporarily unavailable.',
                               textAlign: TextAlign.center,
-                              style: TextStyle(color: Colors.white70),
+                              style: TextStyle(color: Color(0xFF536987)),
                             ),
                             TextButton.icon(
                               onPressed: () => setState(() => _mediaRetry++),
@@ -398,18 +398,18 @@ class _ExerciseDemoScreenState extends ConsumerState<ExerciseDemoScreen> {
           const SizedBox(height: 12),
           const Text(
             'Animation and exercise data provided by ExerciseDB.',
-            style: TextStyle(color: Colors.white54, fontSize: 12),
+            style: TextStyle(color: Color(0xFF73839B), fontSize: 12),
           ),
           const SizedBox(height: 20),
           Text(
             exercise.targetMuscle,
-            style: const TextStyle(color: Color(0xFFFF7043), fontSize: 16),
+            style: const TextStyle(color: Color(0xFF1769E0), fontSize: 16),
           ),
           if (exercise.instructions.isNotEmpty) ...[
             const SizedBox(height: 8),
             Text(
               exercise.instructions,
-              style: const TextStyle(color: Colors.white70, height: 1.5),
+              style: const TextStyle(color: Color(0xFF536987), height: 1.5),
             ),
           ],
           const SizedBox(height: 24),
@@ -421,32 +421,32 @@ class _ExerciseDemoScreenState extends ConsumerState<ExerciseDemoScreen> {
                     ? null
                     : () => setState(() => _targetReps--),
                 icon: const Icon(Icons.remove_circle_outline),
-                color: const Color(0xFFFF7043),
+                color: const Color(0xFF1769E0),
               ),
               Text(
                 '$_targetReps reps',
-                style: const TextStyle(color: Colors.white, fontSize: 20),
+                style: const TextStyle(color: Color(0xFF10264A), fontSize: 20),
               ),
               IconButton(
                 onPressed: _isCounting || _isCountdownActive
                     ? null
                     : () => setState(() => _targetReps++),
                 icon: const Icon(Icons.add_circle_outline),
-                color: const Color(0xFFFF7043),
+                color: const Color(0xFF1769E0),
               ),
             ],
           ),
           Text(
             'Spoken count: $_spokenReps / $_targetReps',
             textAlign: TextAlign.center,
-            style: const TextStyle(color: Colors.white70),
+            style: const TextStyle(color: Color(0xFF536987)),
           ),
           if (_countdown != null) ...[
             const SizedBox(height: 16),
             Container(
               padding: const EdgeInsets.symmetric(vertical: 18),
               decoration: BoxDecoration(
-                color: const Color(0xFF2A201D),
+                color: const Color(0xFFDCEBFF),
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Column(
@@ -454,7 +454,7 @@ class _ExerciseDemoScreenState extends ConsumerState<ExerciseDemoScreen> {
                   const Text(
                     'NEXT EXERCISE STARTING',
                     style: TextStyle(
-                      color: Color(0xFFFFB199),
+                      color: Color(0xFF1769E0),
                       fontSize: 11,
                       fontWeight: FontWeight.w800,
                       letterSpacing: 1.1,
@@ -464,7 +464,7 @@ class _ExerciseDemoScreenState extends ConsumerState<ExerciseDemoScreen> {
                   Text(
                     '$_countdown',
                     style: const TextStyle(
-                      color: Colors.white,
+                      color: Color(0xFF10264A),
                       fontSize: 48,
                       fontWeight: FontWeight.w900,
                     ),
@@ -479,7 +479,7 @@ class _ExerciseDemoScreenState extends ConsumerState<ExerciseDemoScreen> {
               'Set ${_completedSetCount + 1} of ${_currentSessionExercise?.targetSets ?? 1}',
               textAlign: TextAlign.center,
               style: const TextStyle(
-                color: Colors.white,
+                color: Color(0xFF10264A),
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
               ),
@@ -491,12 +491,12 @@ class _ExerciseDemoScreenState extends ConsumerState<ExerciseDemoScreen> {
               keyboardType: const TextInputType.numberWithOptions(
                 decimal: true,
               ),
-              style: const TextStyle(color: Colors.white),
+              style: const TextStyle(color: Color(0xFF10264A)),
               decoration: InputDecoration(
                 labelText: 'Weight used',
                 suffixText: 'kg',
                 filled: true,
-                fillColor: const Color(0xFF1B1D1F),
+                fillColor: const Color(0xFFFFFFFF),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide.none,
@@ -508,7 +508,7 @@ class _ExerciseDemoScreenState extends ConsumerState<ExerciseDemoScreen> {
               const Text(
                 'Rep guide complete. Confirm the set only if you completed it.',
                 textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.white70, fontSize: 12),
+                style: TextStyle(color: Color(0xFF536987), fontSize: 12),
               ),
             ],
           ],
@@ -519,8 +519,8 @@ class _ExerciseDemoScreenState extends ConsumerState<ExerciseDemoScreen> {
               child: LinearProgressIndicator(
                 value: (widget.queueIndex + 1) / _workoutQueue!.length,
                 minHeight: 6,
-                backgroundColor: Colors.white12,
-                color: const Color(0xFFFF7043),
+                backgroundColor: Color(0xFFDFE8F4),
+                color: const Color(0xFF1769E0),
               ),
             ),
             const SizedBox(height: 8),
@@ -528,7 +528,7 @@ class _ExerciseDemoScreenState extends ConsumerState<ExerciseDemoScreen> {
               'Exercise ${widget.queueIndex + 1} of ${_workoutQueue!.length}',
               textAlign: TextAlign.center,
               style: const TextStyle(
-                color: Colors.white70,
+                color: Color(0xFF536987),
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -542,7 +542,7 @@ class _ExerciseDemoScreenState extends ConsumerState<ExerciseDemoScreen> {
                       : _goBackExercise,
                   icon: const Icon(Icons.skip_previous_rounded),
                   style: IconButton.styleFrom(
-                    foregroundColor: const Color(0xFFFF7043),
+                    foregroundColor: const Color(0xFF1769E0),
                   ),
                 ),
                 const SizedBox(width: 8),
@@ -583,8 +583,8 @@ class _ExerciseDemoScreenState extends ConsumerState<ExerciseDemoScreen> {
                           : 'Start',
                     ),
                     style: FilledButton.styleFrom(
-                      backgroundColor: const Color(0xFFFF7043),
-                      foregroundColor: Colors.black,
+                      backgroundColor: const Color(0xFF1769E0),
+                      foregroundColor: Color(0xFFFFFFFF),
                       padding: const EdgeInsets.symmetric(vertical: 14),
                     ),
                   ),
@@ -605,8 +605,8 @@ class _ExerciseDemoScreenState extends ConsumerState<ExerciseDemoScreen> {
                         : 'Skip',
                   ),
                   style: OutlinedButton.styleFrom(
-                    foregroundColor: const Color(0xFFFF7043),
-                    side: const BorderSide(color: Color(0xFFFF7043)),
+                    foregroundColor: const Color(0xFF1769E0),
+                    side: const BorderSide(color: Color(0xFF1769E0)),
                     padding: const EdgeInsets.symmetric(vertical: 14),
                   ),
                 ),
@@ -633,7 +633,7 @@ class _ExerciseDemoScreenState extends ConsumerState<ExerciseDemoScreen> {
           const Text(
             'The voice is a timed guide. It does not detect or verify your movements.',
             textAlign: TextAlign.center,
-            style: TextStyle(color: Colors.white54, fontSize: 12),
+            style: TextStyle(color: Color(0xFF73839B), fontSize: 12),
           ),
         ],
       ),

@@ -34,21 +34,49 @@ class TrainingHomeScreen extends ConsumerWidget {
     );
 
     return Scaffold(
-      backgroundColor: const Color(0xFF101210),
+      backgroundColor: const Color(0xFFF4F7FC),
       appBar: AppBar(
-        backgroundColor: const Color(0xFF101210),
-        title: const Text(
-          'FITGOAL',
-          style: TextStyle(
-            color: Color(0xFFFF7043),
-            fontSize: 15,
-            fontWeight: FontWeight.w900,
-            letterSpacing: 2,
-          ),
+        backgroundColor: const Color(0xFFF4F7FC),
+        titleSpacing: 4,
+        title: Row(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image.asset(
+                'assets/images/fitgoal_launcher.png',
+                width: 36,
+                height: 36,
+              ),
+            ),
+            const SizedBox(width: 10),
+            const Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'FITGOAL',
+                  style: TextStyle(
+                    color: Color(0xFF0B2C77),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w900,
+                    letterSpacing: 1.4,
+                  ),
+                ),
+                Text(
+                  'SMART COACH',
+                  style: TextStyle(
+                    color: Color(0xFF73839B),
+                    fontSize: 9,
+                    fontWeight: FontWeight.w700,
+                    letterSpacing: 1.5,
+                  ),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
       body: RefreshIndicator(
-        color: const Color(0xFFFF7043),
+        color: const Color(0xFF1769E0),
         onRefresh: () async {
           ref.invalidate(weeklyRoutineProvider(_request));
           ref.invalidate(activeWorkoutProvider);
@@ -60,7 +88,7 @@ class TrainingHomeScreen extends ConsumerWidget {
             Text(
               DateFormat('EEEE, MMMM d').format(today),
               style: const TextStyle(
-                color: Colors.white54,
+                color: Color(0xFF73839B),
                 fontSize: 12,
                 fontWeight: FontWeight.w700,
               ),
@@ -69,7 +97,7 @@ class TrainingHomeScreen extends ConsumerWidget {
             const Text(
               'Ready to move?',
               style: TextStyle(
-                color: Colors.white,
+                color: Color(0xFF10264A),
                 fontSize: 30,
                 fontWeight: FontWeight.w800,
                 height: 1.1,
@@ -124,12 +152,12 @@ class TrainingHomeScreen extends ConsumerWidget {
             ),
             const SizedBox(height: 14),
             Material(
-              color: const Color(0xFF1B1D1F),
+              color: const Color(0xFFFFFFFF),
               borderRadius: BorderRadius.circular(16),
               child: ListTile(
                 leading: const Icon(
                   Icons.restaurant_menu_rounded,
-                  color: Color(0xFFFF7043),
+                  color: Color(0xFF1769E0),
                 ),
                 title: const Text(
                   'Meal plan',
@@ -138,7 +166,7 @@ class TrainingHomeScreen extends ConsumerWidget {
                 subtitle: const Text('See today’s meals and nutrition'),
                 trailing: const Icon(
                   Icons.chevron_right,
-                  color: Colors.white54,
+                  color: Color(0xFF73839B),
                 ),
                 onTap: () => Navigator.push(
                   context,
@@ -221,7 +249,7 @@ class _WeeklyProgressCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
-        color: const Color(0xFF1B1D1F),
+        color: const Color(0xFFFFFFFF),
         borderRadius: BorderRadius.circular(18),
       ),
       child: Column(
@@ -237,7 +265,7 @@ class _WeeklyProgressCard extends StatelessWidget {
               ),
               Text(
                 'Week ${plan.trainingWeek}',
-                style: const TextStyle(color: Colors.white54, fontSize: 12),
+                style: const TextStyle(color: Color(0xFF73839B), fontSize: 12),
               ),
             ],
           ),
@@ -248,14 +276,14 @@ class _WeeklyProgressCard extends StatelessWidget {
                 child: Text(
                   '$completed of $planned workouts done',
                   style: const TextStyle(
-                    color: Colors.white,
+                    color: Color(0xFF10264A),
                     fontSize: 15,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
               ),
               if (completed >= planned && planned > 0)
-                const Icon(Icons.check_circle, color: Color(0xFFFF7043)),
+                const Icon(Icons.check_circle, color: Color(0xFF1769E0)),
             ],
           ),
           const SizedBox(height: 10),
@@ -264,8 +292,8 @@ class _WeeklyProgressCard extends StatelessWidget {
             child: LinearProgressIndicator(
               value: progress,
               minHeight: 8,
-              backgroundColor: Colors.white12,
-              color: const Color(0xFFFF7043),
+              backgroundColor: Color(0xFFDFE8F4),
+              color: const Color(0xFF1769E0),
             ),
           ),
           const SizedBox(height: 8),
@@ -273,7 +301,7 @@ class _WeeklyProgressCard extends StatelessWidget {
             completed >= planned && planned > 0
                 ? 'Weekly goal complete. Great work!'
                 : 'Keep going at your own pace.',
-            style: const TextStyle(color: Colors.white60, fontSize: 12),
+            style: const TextStyle(color: Color(0xFF657894), fontSize: 12),
           ),
           Align(
             alignment: Alignment.centerRight,
@@ -330,13 +358,13 @@ class _StartWorkoutCard extends StatelessWidget {
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         gradient: const LinearGradient(
-          colors: [Color(0xFF34231E), Color(0xFF211C1A)],
+          colors: [Color(0xFF0B2C77), Color(0xFF1769E0)],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: const Color(0xFFFF7043).withValues(alpha: .3),
+          color: const Color(0xFF1769E0).withValues(alpha: .3),
         ),
       ),
       child: Column(
@@ -344,7 +372,7 @@ class _StartWorkoutCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              const Icon(Icons.bolt, color: Color(0xFFFF7043)),
+              const Icon(Icons.bolt, color: Color(0xFF9CCBFF)),
               const SizedBox(width: 8),
               Text(
                 weeklyPlanComplete
@@ -355,7 +383,7 @@ class _StartWorkoutCard extends StatelessWidget {
                     ? 'NEXT UP'
                     : 'TODAY’S SESSION',
                 style: const TextStyle(
-                  color: Color(0xFFFFB199),
+                  color: Color(0xFFB8D7FF),
                   fontSize: 11,
                   fontWeight: FontWeight.w800,
                   letterSpacing: 1.2,
@@ -371,7 +399,7 @@ class _StartWorkoutCard extends StatelessWidget {
                 ? 'All planned sessions completed'
                 : todaysWorkout?.dayTitle.split(': ').last ?? 'Start a workout',
             style: const TextStyle(
-              color: Colors.white,
+              color: Color(0xFFFFFFFF),
               fontSize: 22,
               fontWeight: FontWeight.w800,
             ),
@@ -383,7 +411,7 @@ class _StartWorkoutCard extends StatelessWidget {
                 : isRestDay
                 ? 'Pick a session or build one from the exercise library.'
                 : '${todaysWorkout!.exercises.length} exercises · Log every set as you go',
-            style: const TextStyle(color: Colors.white70, fontSize: 13),
+            style: const TextStyle(color: Color(0xFFE0ECFF), fontSize: 13),
           ),
           const SizedBox(height: 18),
           SizedBox(
@@ -403,8 +431,8 @@ class _StartWorkoutCard extends StatelessWidget {
                       days!.first.trainingWeek,
                     ),
               style: FilledButton.styleFrom(
-                backgroundColor: const Color(0xFFFF7043),
-                foregroundColor: Colors.black,
+                backgroundColor: const Color(0xFF1769E0),
+                foregroundColor: Color(0xFFFFFFFF),
                 padding: const EdgeInsets.symmetric(vertical: 14),
               ),
               icon: const Icon(Icons.play_arrow_rounded),
@@ -442,10 +470,10 @@ class _ResumeWorkoutCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: const Color(0xFF2A201D),
+        color: const Color(0xFFDCEBFF),
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: const Color(0xFFFF7043).withValues(alpha: .45),
+          color: const Color(0xFF1769E0).withValues(alpha: .45),
         ),
       ),
       child: Column(
@@ -454,7 +482,7 @@ class _ResumeWorkoutCard extends StatelessWidget {
           const Text(
             'WORKOUT IN PROGRESS',
             style: TextStyle(
-              color: Color(0xFFFFB199),
+              color: Color(0xFF1769E0),
               fontSize: 11,
               fontWeight: FontWeight.w800,
               letterSpacing: 1.2,
@@ -464,7 +492,7 @@ class _ResumeWorkoutCard extends StatelessWidget {
           Text(
             '$exerciseCount exercises · $completedSets sets logged',
             style: const TextStyle(
-              color: Colors.white,
+              color: Color(0xFF10264A),
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
@@ -475,8 +503,8 @@ class _ResumeWorkoutCard extends StatelessWidget {
             child: FilledButton.icon(
               onPressed: onResume,
               style: FilledButton.styleFrom(
-                backgroundColor: const Color(0xFFFF7043),
-                foregroundColor: Colors.black,
+                backgroundColor: const Color(0xFF1769E0),
+                foregroundColor: Color(0xFFFFFFFF),
               ),
               icon: const Icon(Icons.play_arrow_rounded),
               label: const Text('RESUME WORKOUT'),
@@ -494,7 +522,7 @@ class _LoadingCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) => const Padding(
     padding: EdgeInsets.symmetric(vertical: 20),
-    child: Center(child: CircularProgressIndicator(color: Color(0xFFFF7043))),
+    child: Center(child: CircularProgressIndicator(color: Color(0xFF1769E0))),
   );
 }
 
@@ -509,13 +537,13 @@ class _ErrorCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color(0xFF261C19),
+        color: const Color(0xFFEAF2FF),
         borderRadius: BorderRadius.circular(14),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(message, style: const TextStyle(color: Colors.white70)),
+          Text(message, style: const TextStyle(color: Color(0xFF536987))),
           Align(
             alignment: Alignment.centerRight,
             child: TextButton(onPressed: onRetry, child: const Text('Retry')),

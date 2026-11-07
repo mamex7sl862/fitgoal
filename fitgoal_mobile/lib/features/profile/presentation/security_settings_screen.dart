@@ -80,7 +80,7 @@ class _SecuritySettingsScreenState
               const SizedBox(height: 8),
               const Text(
                 'Use your current password to set a new one.',
-                style: TextStyle(color: Colors.white70),
+                style: TextStyle(color: Color(0xFF536987)),
               ),
               const SizedBox(height: 24),
               _passwordField(
@@ -123,7 +123,7 @@ class _SecuritySettingsScreenState
                 const SizedBox(height: 16),
                 Text(
                   _successMessage!,
-                  style: const TextStyle(color: Color(0xFFFF7043)),
+                  style: const TextStyle(color: Color(0xFF1769E0)),
                 ),
               ],
               const SizedBox(height: 24),
