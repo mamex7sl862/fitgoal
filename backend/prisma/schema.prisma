@@ -1,0 +1,245 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// ========== USER MANAGEMENT ==========
+model User {
+  id                  String               @id @default(uuid())
+  email               String               @unique
+  passwordHash        String
+  role                Role                 @default(USER)
+  createdAt           DateTime             @default(now())
+  profile             Profile?
+  goal                UserGoal?
+  workoutPlans        WorkoutPlan[]
+  mealPlans           MealPlan[]
+  workoutLogs         WorkoutLog[]
+  mealLogs            MealLog[]
+  habitLogs           HabitLog[]
+  workoutSessions     WorkoutSession[]
+  customPlanExercises CustomPlanExercise[]
+}
+
+model Profile {
+  id          String  @id @default(uuid())
+  userId      String  @unique
+  displayName String
+  avatarUrl   String?
+  age         Int?
+  gender      String?
+  user        User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// ========== GOAL & NUTRITION ENGINE ==========
+model UserGoal {
+  id                    String   @id @default(uuid())
+  userId                String   @unique
+  primaryGoal           GoalType
+  fitnessLevel          String // BEGINNER, INTERMEDIATE, ADVANCED
+  fitnessLevelUpdatedAt DateTime @default(now())
+  currentWeightKg       Decimal
+  targetWeightKg        Decimal?
+  heightCm              Decimal
+  age                   Int?
+  gender                String?
+  activityLevel         String?
+  bmr                   Int?
+  tdee                  Int?
+  dailyCalorieTarget    Int
+  proteinGrams          Int
+  carbGrams             Int
+  fatGrams              Int
+  user                  User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// ========== EXERCISE LIBRARY ==========
+model Exercise {
+  id                  String               @id @default(uuid())
+  name                String
+  targetMuscle        String
+  category            String
+  equipmentRequired   String[]             @default([])
+  instructions        String
+  gifUrl              String?
+  mediaSource         String?
+  caloriesPerMin      Decimal
+  workoutItems        WorkoutExercise[]
+  customPlanExercises CustomPlanExercise[]
+
+  @@index([targetMuscle])
+  @@index([category])
+  @@index([equipmentRequired], type: Gin)
+}
+
+// ========== WORKOUT ENGINE ==========
+model WorkoutPlan {
+  id          String       @id @default(uuid())
+  userId      String
+  name        String // e.g., "Smart Coach: Lean Muscle Split"
+  description String
+  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  days        WorkoutDay[]
+}
+
+model WorkoutDay {
+  id        String            @id @default(uuid())
+  planId    String
+  dayOfWeek Int // 1 to 7
+  title     String // e.g., "Day 1: Upper Body Focus"
+  plan      WorkoutPlan       @relation(fields: [planId], references: [id], onDelete: Cascade)
+  exercises WorkoutExercise[]
+}
+
+model CustomPlanExercise {
+  id          String   @id @default(uuid())
+  userId      String
+  daysPerWeek Int
+  dayIndex    Int
+  exerciseId  String
+  targetSets  Int
+  targetReps  Int
+  createdAt   DateTime @default(now())
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  exercise    Exercise @relation(fields: [exerciseId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, daysPerWeek, dayIndex, exerciseId])
+  @@index([userId, daysPerWeek, dayIndex])
+}
+
+model WorkoutExercise {
+  id         String          @id @default(uuid())
+  dayId      String?
+  sessionId  String?
+  exerciseId String
+  targetSets Int             @default(0)
+  targetReps Int             @default(0)
+  day        WorkoutDay?     @relation(fields: [dayId], references: [id], onDelete: Cascade)
+  session    WorkoutSession? @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  exercise   Exercise        @relation(fields: [exerciseId], references: [id])
+  sets       ExerciseSet[]
+
+  @@index([sessionId])
+  @@index([exerciseId])
+}
+
+model WorkoutSession {
+  id           String            @id @default(uuid())
+  userId       String
+  startedAt    DateTime          @default(now())
+  endedAt      DateTime?
+  status       String            @default("ACTIVE")
+  trainingWeek Int?
+  planDayIndex Int?
+  user         User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  exercises    WorkoutExercise[]
+  workoutLog   WorkoutLog?
+
+  @@index([userId, status, startedAt])
+  @@index([userId, trainingWeek, planDayIndex, status])
+}
+
+model ExerciseSet {
+  id                String          @id @default(uuid())
+  workoutExerciseId String
+  setNumber         Int
+  weightKg          Decimal         @db.Decimal(8, 2)
+  reps              Int
+  rpe               Decimal?        @db.Decimal(3, 1)
+  completed         Boolean         @default(false)
+  createdAt         DateTime        @default(now())
+  workoutExercise   WorkoutExercise @relation(fields: [workoutExerciseId], references: [id], onDelete: Cascade)
+
+  @@unique([workoutExerciseId, setNumber])
+  @@index([workoutExerciseId, completed])
+}
+
+// ========== MEAL PLAN ENGINE ==========
+model MealPlan {
+  id         String   @id @default(uuid())
+  userId     String
+  name       String // e.g., "Smart Coach: High-Protein Cut"
+  targetKcal Int
+  planDate   DateTime @default(now()) @db.Date
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  meals      Meal[]
+
+  @@unique([userId, planDate])
+}
+
+model Meal {
+  id         String   @id @default(uuid())
+  mealPlanId String
+  mealType   MealType // BREAKFAST, LUNCH, DINNER, SNACK
+  title      String
+  calories   Int
+  protein    Decimal
+  carbs      Decimal
+  fats       Decimal
+  recipe     String // Preparation steps
+  mealPlan   MealPlan @relation(fields: [mealPlanId], references: [id], onDelete: Cascade)
+  mealLog    MealLog?
+}
+
+// ========== PROGRESS & HABIT LOGS ==========
+model WorkoutLog {
+  id             String          @id @default(uuid())
+  userId         String
+  sessionId      String?         @unique
+  completedAt    DateTime        @default(now())
+  durationMins   Int
+  caloriesBurned Int
+  totalVolumeKg  Decimal
+  user           User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  session        WorkoutSession? @relation(fields: [sessionId], references: [id], onDelete: SetNull)
+}
+
+model MealLog {
+  id         String   @id @default(uuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  planMealId String?  @unique
+  planMeal   Meal?    @relation(fields: [planMealId], references: [id], onDelete: SetNull)
+  name       String
+  calories   Int
+  protein    Int      @default(0)
+  carbs      Int      @default(0)
+  fats       Int      @default(0)
+  loggedAt   DateTime @default(now())
+}
+
+model HabitLog {
+  id               String   @id @default(uuid())
+  userId           String
+  user             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  date             DateTime @default(now())
+  waterGoalMet     Boolean  @default(false)
+  workoutCompleted Boolean  @default(false)
+  sleepGoalMet     Boolean  @default(false)
+
+  @@unique([userId, date])
+}
+
+// ========== ENUMS ==========
+enum Role {
+  USER
+  ADMIN
+}
+
+enum GoalType {
+  FAT_LOSS
+  MUSCLE_GAIN
+  STRENGTH
+  MAINTENANCE
+}
+
+enum MealType {
+  BREAKFAST
+  LUNCH
+  DINNER
+  SNACK
+}

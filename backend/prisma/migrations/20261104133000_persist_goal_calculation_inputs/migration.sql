@@ -1,0 +1,6 @@
+ALTER TABLE "UserGoal"
+ADD COLUMN "age" INTEGER,
+ADD COLUMN "gender" TEXT,
+ADD COLUMN "activityLevel" TEXT,
+ADD COLUMN "bmr" INTEGER,
+ADD COLUMN "tdee" INTEGER;

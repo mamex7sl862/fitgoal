@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Environment files and local credentials
+.env
+.env.*
+!.env.example
+
+# Generated output
+backend/dist/
+fitgoal_mobile/build/
+fitgoal_mobile/.dart_tool/
+fitgoal_mobile/.flutter-plugins
+fitgoal_mobile/.flutter-plugins-dependencies
+fitgoal_mobile/coverage/
+
+# Local tooling and scratch files
+scratch/
+backend/.agents/
+backend/.claude/
+backend/.cursor/
+backend/.devin/
+**/.idea/
+*.iml
+*.log
