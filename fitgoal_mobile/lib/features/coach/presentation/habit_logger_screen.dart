@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 
 import '../data/logger_repository.dart';
+import '../../workouts/data/workout_repository.dart';
 
 class HabitLoggerScreen extends ConsumerStatefulWidget {
   const HabitLoggerScreen({super.key});
@@ -215,6 +217,10 @@ class _HabitLoggerScreenState extends ConsumerState<HabitLoggerScreen> {
 
                 const SizedBox(height: 28),
 
+                const _WorkoutProgressSection(),
+
+                const SizedBox(height: 28),
+
                 // Daily Habits
                 const Text(
                   'Daily Habits',
@@ -406,7 +412,6 @@ class _HabitLoggerScreenState extends ConsumerState<HabitLoggerScreen> {
     }
   }
 
-  // Habit Checkbox Widget
   Widget _buildHabitTile(
     String title,
     IconData icon,
@@ -439,4 +444,200 @@ class _HabitLoggerScreenState extends ConsumerState<HabitLoggerScreen> {
       ),
     );
   }
+}
+
+class _WorkoutProgressSection extends ConsumerWidget {
+  const _WorkoutProgressSection();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final progress = ref.watch(workoutCalorieProgressProvider);
+    final history = ref.watch(workoutCalorieHistoryProvider);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        const Text(
+          'Workout Progress',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const SizedBox(height: 12),
+        progress.when(
+          loading: () => const Center(
+            child: CircularProgressIndicator(color: Color(0xFFFF7043)),
+          ),
+          error: (error, stack) => _WorkoutProgressError(
+            message: 'Could not load workout progress: $error',
+            onRetry: () => ref.invalidate(workoutCalorieProgressProvider),
+          ),
+          data: (value) => Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: const Color(0xFF1B1D1F),
+              borderRadius: BorderRadius.circular(14),
+            ),
+            child: Row(
+              children: [
+                _WorkoutMetric(
+                  label: 'Workouts',
+                  value: '${value.completedWorkouts}',
+                ),
+                _WorkoutMetric(
+                  label: 'This week',
+                  value: '${value.weekCalories} kcal',
+                ),
+                _WorkoutMetric(
+                  label: 'All time',
+                  value: '${value.allTimeCalories} kcal',
+                ),
+              ],
+            ),
+          ),
+        ),
+        const SizedBox(height: 20),
+        const Text(
+          'Recent Workouts',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const SizedBox(height: 8),
+        history.when(
+          loading: () => const Center(
+            child: CircularProgressIndicator(color: Color(0xFFFF7043)),
+          ),
+          error: (error, stack) => _WorkoutProgressError(
+            message: 'Could not load workout history: $error',
+            onRetry: () => ref.invalidate(workoutCalorieHistoryProvider),
+          ),
+          data: (entries) => entries.isEmpty
+              ? const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 20),
+                  child: Text(
+                    'Completed workouts will appear here.',
+                    style: TextStyle(color: Colors.white54),
+                    textAlign: TextAlign.center,
+                  ),
+                )
+              : Column(
+                  children: entries.take(5).map((entry) {
+                    final exerciseSummary = entry.exerciseNames.isEmpty
+                        ? 'Workout'
+                        : entry.exerciseNames.take(3).join(', ');
+                    return Container(
+                      margin: const EdgeInsets.only(bottom: 8),
+                      padding: const EdgeInsets.all(14),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF1B1D1F),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Row(
+                        children: [
+                          const Icon(
+                            Icons.fitness_center,
+                            color: Color(0xFFFF7043),
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  DateFormat('EEE, MMM d · h:mm a')
+                                      .format(entry.completedAt.toLocal()),
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                const SizedBox(height: 3),
+                                Text(
+                                  '$exerciseSummary · ${entry.durationMins} min',
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(
+                                    color: Colors.white54,
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Text(
+                            '${entry.caloriesBurned} kcal',
+                            style: const TextStyle(
+                              color: Color(0xFFFFB199),
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  }).toList(),
+                ),
+        ),
+      ],
+    );
+  }
+}
+
+class _WorkoutMetric extends StatelessWidget {
+  const _WorkoutMetric({required this.label, required this.value});
+
+  final String label;
+  final String value;
+
+  @override
+  Widget build(BuildContext context) => Expanded(
+    child: Column(
+      children: [
+        Text(
+          value,
+          textAlign: TextAlign.center,
+          style: const TextStyle(
+            color: Color(0xFFFFB199),
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const SizedBox(height: 4),
+        Text(
+          label,
+          textAlign: TextAlign.center,
+          style: const TextStyle(color: Colors.white54, fontSize: 11),
+        ),
+      ],
+    ),
+  );
+}
+
+class _WorkoutProgressError extends StatelessWidget {
+  const _WorkoutProgressError({required this.message, required this.onRetry});
+
+  final String message;
+  final VoidCallback onRetry;
+
+  @override
+  Widget build(BuildContext context) => Row(
+    children: [
+      Expanded(
+        child: Text(
+          message,
+          style: const TextStyle(color: Colors.redAccent, fontSize: 12),
+        ),
+      ),
+      IconButton(
+        tooltip: 'Retry',
+        onPressed: onRetry,
+        icon: const Icon(Icons.refresh, color: Color(0xFFFF7043)),
+      ),
+    ],
+  );
 }
