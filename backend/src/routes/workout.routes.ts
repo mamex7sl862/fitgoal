@@ -123,6 +123,26 @@ router.post(
   },
 );
 
+router.delete(
+  '/plan/day-exercises/:customPlanExerciseId',
+  authenticateToken,
+  async (req: AuthenticatedRequest, res: Response) => {
+    const userId = req.user?.userId;
+    const { customPlanExerciseId } = req.params;
+    if (!userId) return res.status(401).json({ message: 'Unauthorized.' });
+    try {
+      const deleted = await prisma.customPlanExercise.deleteMany({
+        where: { id: customPlanExerciseId, userId },
+      });
+      if (deleted.count === 0) return res.status(404).json({ message: 'Exercise not found in your plan.' });
+      return res.json({ message: 'Exercise removed from plan.' });
+    } catch (error) {
+      console.error('Failed to remove custom plan exercise:', error);
+      return res.status(500).json({ message: 'Failed to remove exercise.' });
+    }
+  },
+);
+
 function getTrainingSplit(daysPerWeek: number) {
   if (daysPerWeek <= 3) {
     return Array.from({ length: daysPerWeek }, (_, index) => ({

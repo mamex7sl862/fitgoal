@@ -26,6 +26,7 @@ class _WorkoutRoutineScreenState extends ConsumerState<WorkoutRoutineScreen> {
 
   int _daysPerWeek = 4;
   final Set<String> _availableEquipment = Set.from(_equipmentOptions);
+  final Set<String> _hiddenExerciseIds = {};
 
   WorkoutRequest get _workoutRequest => WorkoutRequest(
     daysPerWeek: _daysPerWeek,
@@ -49,12 +50,12 @@ class _WorkoutRoutineScreenState extends ConsumerState<WorkoutRoutineScreen> {
     );
 
     return Scaffold(
-      backgroundColor: const Color(0xFF101112),
+      backgroundColor: const Color(0xFFF4F7FC),
       appBar: AppBar(
         title: const Text('Your Weekly Workout Plan'),
         backgroundColor: Colors.transparent,
         elevation: 0,
-        foregroundColor: const Color(0xFFFF7043),
+        foregroundColor: const Color(0xFF1769E0),
         actions: [
           IconButton(
             tooltip: 'Exercise library',
@@ -72,7 +73,7 @@ class _WorkoutRoutineScreenState extends ConsumerState<WorkoutRoutineScreen> {
           Expanded(
             child: routineAsync.when(
               loading: () => const Center(
-                child: CircularProgressIndicator(color: Color(0xFFFF7043)),
+                child: CircularProgressIndicator(color: Color(0xFF1769E0)),
               ),
               error: (error, stack) => Center(
                 child: Padding(
@@ -141,7 +142,7 @@ class _WorkoutRoutineScreenState extends ConsumerState<WorkoutRoutineScreen> {
       margin: const EdgeInsets.only(bottom: 14),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color(0xFF1B1D1F),
+        color: const Color(0xFFFFFFFF),
         borderRadius: BorderRadius.circular(14),
       ),
       child: Column(
@@ -150,7 +151,7 @@ class _WorkoutRoutineScreenState extends ConsumerState<WorkoutRoutineScreen> {
           const Text(
             'YOUR WEEKLY PROGRESS',
             style: TextStyle(
-              color: Color(0xFFFFB199),
+              color: Color(0xFF1769E0),
               fontSize: 11,
               fontWeight: FontWeight.w800,
               letterSpacing: 1.1,
@@ -159,7 +160,7 @@ class _WorkoutRoutineScreenState extends ConsumerState<WorkoutRoutineScreen> {
           const SizedBox(height: 4),
           Text(
             'Training week $trainingWeek',
-            style: const TextStyle(color: Colors.white54, fontSize: 12),
+            style: const TextStyle(color: Color(0xFF73839B), fontSize: 12),
           ),
           const SizedBox(height: 10),
           Row(
@@ -168,7 +169,7 @@ class _WorkoutRoutineScreenState extends ConsumerState<WorkoutRoutineScreen> {
                 child: Text(
                   '$completedDays of $plannedDays workouts completed',
                   style: const TextStyle(
-                    color: Colors.white,
+                    color: Color(0xFF10264A),
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
                   ),
@@ -177,7 +178,7 @@ class _WorkoutRoutineScreenState extends ConsumerState<WorkoutRoutineScreen> {
               Text(
                 '${(progress * 100).round()}%',
                 style: const TextStyle(
-                  color: Color(0xFFFF7043),
+                  color: Color(0xFF1769E0),
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -189,15 +190,15 @@ class _WorkoutRoutineScreenState extends ConsumerState<WorkoutRoutineScreen> {
             child: LinearProgressIndicator(
               value: progress,
               minHeight: 8,
-              backgroundColor: Colors.white12,
-              color: const Color(0xFFFF7043),
+              backgroundColor: Color(0xFFDFE8F4),
+              color: const Color(0xFF1769E0),
             ),
           ),
           const SizedBox(height: 10),
           calorieProgress.when(
             loading: () => const Text(
               'Loading calorie progress…',
-              style: TextStyle(color: Colors.white54, fontSize: 12),
+              style: TextStyle(color: Color(0xFF73839B), fontSize: 12),
             ),
             error: (error, stack) => Text(
               'Could not load calorie progress: $error',
@@ -205,7 +206,7 @@ class _WorkoutRoutineScreenState extends ConsumerState<WorkoutRoutineScreen> {
             ),
             data: (value) => Text(
               '${value.weekCalories} kcal estimated over the last 7 days',
-              style: const TextStyle(color: Colors.white70, fontSize: 12),
+              style: const TextStyle(color: Color(0xFF536987), fontSize: 12),
             ),
           ),
         ],
@@ -226,10 +227,10 @@ class _WorkoutRoutineScreenState extends ConsumerState<WorkoutRoutineScreen> {
       margin: const EdgeInsets.only(bottom: 14),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color(0xFF2A201D),
+        color: const Color(0xFFDCEBFF),
         borderRadius: BorderRadius.circular(14),
         border: Border.all(
-          color: const Color(0xFFFF7043).withValues(alpha: .3),
+          color: const Color(0xFF1769E0).withValues(alpha: .3),
         ),
       ),
       child: Column(
@@ -238,7 +239,7 @@ class _WorkoutRoutineScreenState extends ConsumerState<WorkoutRoutineScreen> {
           Text(
             title,
             style: const TextStyle(
-              color: Color(0xFFFFB199),
+              color: Color(0xFF0B2C77),
               fontSize: 15,
               fontWeight: FontWeight.bold,
             ),
@@ -247,7 +248,7 @@ class _WorkoutRoutineScreenState extends ConsumerState<WorkoutRoutineScreen> {
             const SizedBox(height: 6),
             Text(
               day.planGuidance,
-              style: const TextStyle(color: Colors.white70, fontSize: 13),
+              style: const TextStyle(color: Color(0xFF536987), fontSize: 13),
             ),
           ],
           if (goal != null) ...[
@@ -279,12 +280,12 @@ class _WorkoutRoutineScreenState extends ConsumerState<WorkoutRoutineScreen> {
       children: [
         Text(
           label,
-          style: const TextStyle(color: Colors.white54, fontSize: 11),
+          style: const TextStyle(color: Color(0xFF73839B), fontSize: 11),
         ),
         Text(
           value,
           style: const TextStyle(
-            color: Colors.white,
+            color: Color(0xFF10264A),
             fontSize: 13,
             fontWeight: FontWeight.w600,
           ),
@@ -303,7 +304,7 @@ class _WorkoutRoutineScreenState extends ConsumerState<WorkoutRoutineScreen> {
       margin: const EdgeInsets.fromLTRB(16, 0, 16, 8),
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: const Color(0xFF1B1D1F),
+        color: const Color(0xFFFFFFFF),
         borderRadius: BorderRadius.circular(14),
       ),
       child: Column(
@@ -315,15 +316,15 @@ class _WorkoutRoutineScreenState extends ConsumerState<WorkoutRoutineScreen> {
                 child: Text(
                   'Training days per week',
                   style: TextStyle(
-                    color: Colors.white,
+                    color: Color(0xFF10264A),
                     fontWeight: FontWeight.w600,
                   ),
                 ),
               ),
               DropdownButton<int>(
                 value: _daysPerWeek,
-                dropdownColor: const Color(0xFF1B1D1F),
-                style: const TextStyle(color: Color(0xFFFF7043)),
+                dropdownColor: const Color(0xFFFFFFFF),
+                style: const TextStyle(color: Color(0xFF1769E0)),
                 items: List.generate(
                   maxDays - 1,
                   (index) => DropdownMenuItem(
@@ -342,7 +343,7 @@ class _WorkoutRoutineScreenState extends ConsumerState<WorkoutRoutineScreen> {
             Text(
               'Coach level: ${_displayName(trainingLevel)}',
               style: const TextStyle(
-                color: Color(0xFFFF7043),
+                color: Color(0xFF1769E0),
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -353,13 +354,13 @@ class _WorkoutRoutineScreenState extends ConsumerState<WorkoutRoutineScreen> {
                   : trainingLevel == 'INTERMEDIATE'
                   ? 'Your coach will consider an upgrade after 20 well-logged workouts over at least 5 weeks.'
                   : 'Advanced is the highest training level.',
-              style: const TextStyle(color: Colors.white54, fontSize: 12),
+              style: const TextStyle(color: Color(0xFF73839B), fontSize: 12),
             ),
           ],
           const SizedBox(height: 8),
           const Text(
             'Equipment available',
-            style: TextStyle(color: Colors.white70, fontSize: 13),
+            style: TextStyle(color: Color(0xFF536987), fontSize: 13),
           ),
           const SizedBox(height: 6),
           Wrap(
@@ -395,26 +396,26 @@ class _WorkoutRoutineScreenState extends ConsumerState<WorkoutRoutineScreen> {
     return Padding(
       padding: const EdgeInsets.only(bottom: 14),
       child: Material(
-        color: const Color(0xFF1B1D1F),
+        color: const Color(0xFFFFFFFF),
         borderRadius: BorderRadius.circular(16),
         clipBehavior: Clip.antiAlias,
         child: ExpansionTile(
           initiallyExpanded: !day.isRestDay,
-          iconColor: const Color(0xFFFF7043),
-          collapsedIconColor: Colors.white54,
+          iconColor: const Color(0xFF1769E0),
+          collapsedIconColor: Color(0xFF73839B),
           title: Row(
             children: [
               Expanded(
                 child: Text(
                   day.dayTitle,
                   style: const TextStyle(
-                    color: Colors.white,
+                    color: Color(0xFF10264A),
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
               if (completed)
-                const Icon(Icons.check_circle, color: Color(0xFFFF7043)),
+                const Icon(Icons.check_circle, color: Color(0xFF1769E0)),
             ],
           ),
           subtitle: Text(
@@ -423,11 +424,13 @@ class _WorkoutRoutineScreenState extends ConsumerState<WorkoutRoutineScreen> {
                 : day.isRestDay
                 ? 'Rest and recovery'
                 : '${day.exercises.length} exercises',
-            style: const TextStyle(color: Color(0xFFFF7043), fontSize: 12),
+            style: const TextStyle(color: Color(0xFF1769E0), fontSize: 12),
           ),
           children: [
             if (!day.isRestDay && day.exercises.isNotEmpty)
-              ...day.exercises.map(_buildExerciseTile),
+              ...day.exercises.asMap().entries.map(
+                (entry) => _buildExerciseTile(entry.value, dayIndex),
+              ),
             if (!day.isRestDay)
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
@@ -440,17 +443,38 @@ class _WorkoutRoutineScreenState extends ConsumerState<WorkoutRoutineScreen> {
             if (!day.isRestDay && day.exercises.isNotEmpty)
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-                child: SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton.icon(
-                    onPressed: () => _openWorkout(
-                      day.exercises,
-                      trainingWeek: trainingWeek,
-                      planDayIndex: dayIndex,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    FilledButton.icon(
+                      onPressed: () => _openWorkout(
+                        day.exercises.where((exercise) => !_hiddenExerciseIds.contains(exercise.id)).toList(),
+                        trainingWeek: trainingWeek,
+                        planDayIndex: dayIndex,
+                      ),
+                      style: FilledButton.styleFrom(
+                        backgroundColor: const Color(0xFF1769E0),
+                        foregroundColor: const Color(0xFFFFFFFF),
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                        textStyle: const TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w800,
+                          letterSpacing: 0.8,
+                        ),
+                      ),
+                      icon: const Icon(Icons.play_arrow_rounded),
+                      label: const Text('START WORKOUT'),
                     ),
-                    icon: const Icon(Icons.play_arrow),
-                    label: const Text('Start this workout'),
-                  ),
+                    const SizedBox(height: 6),
+                    Text(
+                      '${day.exercises.length} exercises · est. ${day.exercises.length * 4} min',
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(color: Color(0xFF73839B), fontSize: 12),
+                    ),
+                  ],
                 ),
               ),
             if (!day.isRestDay && day.exercises.isEmpty)
@@ -458,7 +482,7 @@ class _WorkoutRoutineScreenState extends ConsumerState<WorkoutRoutineScreen> {
                 padding: EdgeInsets.fromLTRB(16, 0, 16, 16),
                 child: Text(
                   'No exercises match your equipment filters yet. Add one from the exercise library or change the filters.',
-                  style: TextStyle(color: Colors.white70),
+                  style: TextStyle(color: Color(0xFF536987)),
                 ),
               ),
           ],
@@ -548,34 +572,107 @@ class _WorkoutRoutineScreenState extends ConsumerState<WorkoutRoutineScreen> {
       ..invalidate(weeklyRoutineProvider(_workoutRequest));
   }
 
-  Widget _buildExerciseTile(RoutineExercise exercise) {
+  Widget _buildExerciseTile(RoutineExercise exercise, int dayIndex) {
     final previousSummary = exercise.previousSets.isEmpty
         ? 'No previous session'
         : 'Previous: ${exercise.previousSets.map((set) => '${set.weightKg.toStringAsFixed(1)} kg × ${set.reps}').join(', ')}';
-    return ListTile(
+
+    final setsRepsText = Text(
+      '${exercise.sets} × ${exercise.reps}',
+      style: const TextStyle(
+        color: Color(0xFF1769E0),
+        fontWeight: FontWeight.bold,
+      ),
+    );
+
+    if (exercise.isCustomPlanExercise && exercise.customPlanExerciseId != null) {
+      return ListTile(
+        leading: const CircleAvatar(
+          backgroundColor: Color(0xFFEAF2FF),
+          child: Icon(Icons.fitness_center, color: Color(0xFF1769E0), size: 20),
+        ),
+        title: Text(
+          exercise.name,
+          style: const TextStyle(
+            color: Color(0xFF10264A),
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        subtitle: Text(
+          '${exercise.isCustomPlanExercise ? 'Added to plan · ' : ''}${exercise.targetMuscle} · $previousSummary',
+          style: const TextStyle(color: Color(0xFF73839B), fontSize: 12),
+        ),
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            setsRepsText,
+            IconButton(
+              icon: const Icon(Icons.delete_outline),
+              tooltip: 'Remove from plan',
+              onPressed: () => _removeCustomExercise(exercise, dayIndex),
+            ),
+          ],
+        ),
+      );
+    }
+
+    final isHidden = _hiddenExerciseIds.contains(exercise.id);
+
+    final tile = ListTile(
       leading: const CircleAvatar(
-        backgroundColor: Color(0xFF2C2C2C),
-        child: Icon(Icons.fitness_center, color: Color(0xFFFF7043), size: 20),
+        backgroundColor: Color(0xFFEAF2FF),
+        child: Icon(Icons.fitness_center, color: Color(0xFF1769E0), size: 20),
       ),
       title: Text(
         exercise.name,
         style: const TextStyle(
-          color: Colors.white,
+          color: Color(0xFF10264A),
           fontWeight: FontWeight.w600,
         ),
       ),
       subtitle: Text(
-        '${exercise.isCustomPlanExercise ? 'Added to plan · ' : ''}${exercise.targetMuscle} · $previousSummary',
-        style: const TextStyle(color: Colors.white54, fontSize: 12),
+        '${exercise.targetMuscle} · $previousSummary',
+        style: const TextStyle(color: Color(0xFF73839B), fontSize: 12),
       ),
-      trailing: Text(
-        '${exercise.sets} × ${exercise.reps}',
-        style: const TextStyle(
-          color: Color(0xFFFF7043),
-          fontWeight: FontWeight.bold,
-        ),
-      ),
+      trailing: isHidden
+          ? IconButton(
+              icon: const Icon(Icons.visibility_outlined),
+              tooltip: 'Show in session',
+              onPressed: () => setState(() => _hiddenExerciseIds.remove(exercise.id)),
+            )
+          : Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                setsRepsText,
+                IconButton(
+                  icon: const Icon(Icons.visibility_off_outlined),
+                  tooltip: "Hide from today's session",
+                  onPressed: () => setState(() => _hiddenExerciseIds.add(exercise.id)),
+                ),
+              ],
+            ),
     );
+
+    if (isHidden) {
+      return Opacity(opacity: 0.4, child: tile);
+    }
+    return tile;
+  }
+
+  Future<void> _removeCustomExercise(RoutineExercise exercise, int dayIndex) async {
+    try {
+      await ref.read(workoutRepositoryProvider).removeCustomPlanExercise(exercise.customPlanExerciseId!);
+      if (!mounted) return;
+      ref.invalidate(weeklyRoutineProvider(_workoutRequest));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('${exercise.name} removed from plan.')),
+      );
+    } catch (error) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Could not remove exercise: $error')),
+      );
+    }
   }
 
   String _displayName(String value) =>

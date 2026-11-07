@@ -637,6 +637,13 @@ class WorkoutRepository {
     return _jsonInt(responseData['addedCount'], field: 'addedCount') ?? 0;
   }
 
+  Future<void> removeCustomPlanExercise(String customPlanExerciseId) async {
+    await _dio.delete(
+      '/workouts/plan/day-exercises/$customPlanExerciseId',
+      options: await _authorizedOptions(),
+    );
+  }
+
   Future<ExercisePage> searchExercises({
     required String search,
     required List<String> muscles,

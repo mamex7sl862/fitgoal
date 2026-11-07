@@ -26,9 +26,9 @@ class ActiveWorkoutScreen extends ConsumerStatefulWidget {
 }
 
 class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
-  static const _backgroundColor = Color(0xFF101210);
-  static const _surfaceColor = Color(0xFF1B201C);
-  static const _accentColor = Color(0xFFFF7043);
+  static const _backgroundColor = Color(0xFFF4F7FC);
+  static const _surfaceColor = Color(0xFFFFFFFF);
+  static const _accentColor = Color(0xFF1769E0);
 
   WorkoutSession? _session;
   final Map<String, _SetInput> _inputs = {};
@@ -123,7 +123,7 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
     final rpeText = input.rpe.text.trim();
     final rpe = rpeText.isEmpty ? null : double.tryParse(rpeText);
     if (weight == null ||
-        weight < 0 ||
+        weight <= 0 ||
         reps == null ||
         reps < 1 ||
         (rpeText.isNotEmpty && (rpe == null || rpe < 1 || rpe > 10))) {
@@ -208,6 +208,7 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
       final messenger = ScaffoldMessenger.of(context);
       ref
         ..invalidate(weeklyRoutineProvider)
+        ..invalidate(activeWorkoutProvider)
         ..invalidate(workoutHistoryProvider)
         ..invalidate(workoutCalorieProgressProvider)
         ..invalidate(dailySummaryProvider)
@@ -246,7 +247,7 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
             Text(
               'STAY CONSISTENT',
               style: TextStyle(
-                color: Colors.white54,
+                color: Color(0xFF73839B),
                 fontSize: 10,
                 fontWeight: FontWeight.w700,
                 letterSpacing: 1.3,
@@ -254,13 +255,13 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
             ),
           ],
         ),
-        foregroundColor: Colors.white,
+        foregroundColor: Color(0xFF10264A),
         backgroundColor: _backgroundColor,
         elevation: 0,
       ),
       body: _isLoading
           ? const Center(
-              child: CircularProgressIndicator(color: Color(0xFFFF7043)),
+              child: CircularProgressIndicator(color: Color(0xFF1769E0)),
             )
           : _errorMessage != null
           ? Center(
@@ -304,7 +305,7 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
                         style: ElevatedButton.styleFrom(
                           minimumSize: const Size.fromHeight(54),
                           backgroundColor: _accentColor,
-                          foregroundColor: const Color(0xFF07120A),
+                          foregroundColor: const Color(0xFFFFFFFF),
                           textStyle: const TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w800,
@@ -333,7 +334,7 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
         gradient: const LinearGradient(
-          colors: [Color(0xFF33241F), Color(0xFF241D1A)],
+          colors: [Color(0xFF0B2C77), Color(0xFF1769E0)],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
@@ -362,7 +363,7 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
                     const Text(
                       'YOU’RE IN THE ZONE',
                       style: TextStyle(
-                        color: Color(0xFFFFB199),
+                        color: Color(0xFFB8D7FF),
                         fontSize: 10,
                         fontWeight: FontWeight.w800,
                         letterSpacing: 1.2,
@@ -372,7 +373,7 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
                     Text(
                       '${exercises.length} exercises planned',
                       style: const TextStyle(
-                        color: Colors.white,
+                        color: Color(0xFF10264A),
                         fontSize: 18,
                         fontWeight: FontWeight.w800,
                       ),
@@ -389,7 +390,7 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
                 child: Text(
                   'SESSION PROGRESS',
                   style: TextStyle(
-                    color: Colors.white70,
+                    color: Color(0xFF536987),
                     fontSize: 11,
                     fontWeight: FontWeight.w700,
                     letterSpacing: .9,
@@ -399,7 +400,7 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
               Text(
                 '$_completedSetCount / $_plannedSetCount sets',
                 style: const TextStyle(
-                  color: Colors.white,
+                  color: Color(0xFF10264A),
                   fontSize: 12,
                   fontWeight: FontWeight.w700,
                 ),
@@ -412,7 +413,7 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
             child: LinearProgressIndicator(
               value: progress,
               minHeight: 8,
-              backgroundColor: Colors.white12,
+              backgroundColor: Color(0xFFDFE8F4),
               color: _accentColor,
             ),
           ),
@@ -447,7 +448,7 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
       decoration: BoxDecoration(
         color: _surfaceColor,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: Colors.white.withValues(alpha: .06)),
+        border: Border.all(color: Color(0xFF10264A).withValues(alpha: .06)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -458,7 +459,7 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
                 child: Text(
                   'YOUR FITNESS JOURNEY',
                   style: TextStyle(
-                    color: Colors.white70,
+                    color: Color(0xFF536987),
                     fontSize: 11,
                     fontWeight: FontWeight.w800,
                     letterSpacing: 1.1,
@@ -494,7 +495,7 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
                 return Expanded(
                   child: Container(
                     height: 2,
-                    color: completed ? _accentColor : Colors.white12,
+                    color: completed ? _accentColor : Color(0xFFDFE8F4),
                   ),
                 );
               }
@@ -509,10 +510,10 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
                     decoration: BoxDecoration(
                       color: completed || current
                           ? _accentColor
-                          : const Color(0xFF2A302B),
+                          : const Color(0xFFEAF2FF),
                       shape: BoxShape.circle,
                       border: Border.all(
-                        color: current ? Colors.white : Colors.transparent,
+                        color: current ? Color(0xFF10264A) : Colors.transparent,
                         width: 2,
                       ),
                     ),
@@ -524,15 +525,15 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
                           : Icons.lock_outline,
                       size: 17,
                       color: completed || current
-                          ? const Color(0xFF07120A)
-                          : Colors.white38,
+                          ? const Color(0xFFFFFFFF)
+                          : Color(0xFF96A4B8),
                     ),
                   ),
                   const SizedBox(height: 7),
                   Text(
                     _levelLabel(levels[levelIndex]),
                     style: TextStyle(
-                      color: current ? Colors.white : Colors.white54,
+                      color: current ? Color(0xFF10264A) : Color(0xFF73839B),
                       fontSize: 10,
                       fontWeight: current ? FontWeight.w800 : FontWeight.w600,
                     ),
@@ -545,7 +546,7 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
           Text(
             nextLevel == null ? milestone : 'Next up: $nextLevel',
             style: const TextStyle(
-              color: Colors.white,
+              color: Color(0xFF10264A),
               fontSize: 14,
               fontWeight: FontWeight.w700,
             ),
@@ -554,13 +555,13 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
             const SizedBox(height: 4),
             Text(
               milestone,
-              style: const TextStyle(color: Colors.white70, fontSize: 12),
+              style: const TextStyle(color: Color(0xFF536987), fontSize: 12),
             ),
             const SizedBox(height: 6),
             const Text(
               'Complete at least 75% of planned sets in each workout to qualify.',
               style: TextStyle(
-                color: Colors.white54,
+                color: Color(0xFF73839B),
                 fontSize: 11,
                 height: 1.4,
               ),
@@ -625,7 +626,7 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
               _restSeconds == 0
                   ? 'Rest timer ready'
                   : 'Rest: ${(_restSeconds ~/ 60).toString().padLeft(2, '0')}:${(_restSeconds % 60).toString().padLeft(2, '0')}',
-              style: const TextStyle(color: Colors.white),
+              style: const TextStyle(color: Color(0xFF10264A)),
             ),
           ),
           TextButton(
@@ -656,7 +657,7 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
       decoration: BoxDecoration(
         color: _surfaceColor,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: Colors.white.withValues(alpha: .06)),
+        border: Border.all(color: Color(0xFF10264A).withValues(alpha: .06)),
       ),
       child: Padding(
         padding: const EdgeInsets.all(15),
@@ -668,7 +669,7 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
               child: Text(
                 'EXERCISE ${(exerciseIndex + 1).toString().padLeft(2, '0')}',
                 style: const TextStyle(
-                  color: Colors.white54,
+                  color: Color(0xFF73839B),
                   fontSize: 9,
                   fontWeight: FontWeight.w800,
                   letterSpacing: 1,
@@ -690,7 +691,7 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
                         : Container(
                             width: 72,
                             height: 72,
-                            color: const Color(0xFF272E28),
+                            color: const Color(0xFFEAF2FF),
                             child: const Center(
                               child: CircularProgressIndicator(
                                 strokeWidth: 2,
@@ -701,10 +702,10 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
                     errorBuilder: (_, _, _) => Container(
                       width: 72,
                       height: 72,
-                      color: const Color(0xFF272E28),
+                      color: const Color(0xFFEAF2FF),
                       child: const Icon(
                         Icons.fitness_center,
-                        color: Colors.white54,
+                        color: Color(0xFF73839B),
                       ),
                     ),
                   ),
@@ -714,7 +715,7 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
                   child: Text(
                     exercise.exercise.name,
                     style: const TextStyle(
-                      color: Colors.white,
+                      color: Color(0xFF10264A),
                       fontSize: 16,
                       fontWeight: FontWeight.w800,
                     ),
@@ -746,7 +747,7 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
                 Text(
                   '${exercise.sets.length}/${exercise.targetSets} DONE',
                   style: const TextStyle(
-                    color: Color(0xFFFFB199),
+                    color: Color(0xFF1769E0),
                     fontSize: 9,
                     fontWeight: FontWeight.w800,
                     letterSpacing: .7,
@@ -761,7 +762,7 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
                 if (snapshot.hasError) {
                   return Text(
                     'Previous stats unavailable: ${snapshot.error}',
-                    style: const TextStyle(color: Colors.orangeAccent),
+                    style: const TextStyle(color: Color(0xFF1769E0)),
                   );
                 }
                 if (!snapshot.hasData) {
@@ -779,7 +780,7 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
                 return Text(
                   '$previous\n${value.recommendationReason}${value.recommendedWeightKg == null ? '' : ' Suggested: ${value.recommendedWeightKg!.toStringAsFixed(1)} kg'}',
                   style: const TextStyle(
-                    color: Color(0xFFFFB199),
+                    color: Color(0xFF1769E0),
                     fontSize: 12,
                     height: 1.5,
                   ),
@@ -791,12 +792,12 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
               scrollDirection: Axis.horizontal,
               child: DataTable(
                 headingTextStyle: const TextStyle(
-                  color: Colors.white54,
+                  color: Color(0xFF73839B),
                   fontSize: 11,
                   fontWeight: FontWeight.w700,
                 ),
                 dataTextStyle: const TextStyle(
-                  color: Colors.white,
+                  color: Color(0xFF10264A),
                   fontSize: 12,
                 ),
                 dividerThickness: .5,
@@ -804,12 +805,35 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
                 dataRowMinHeight: 54,
                 dataRowMaxHeight: 64,
                 columnSpacing: 12,
-                columns: const [
-                  DataColumn(label: Text('Set')),
-                  DataColumn(label: Text('Weight kg')),
-                  DataColumn(label: Text('Reps')),
-                  DataColumn(label: Text('RPE')),
-                  DataColumn(label: Text('')),
+                columns: [
+                  const DataColumn(label: Text('Set')),
+                  DataColumn(
+                    label: RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: 'Weight kg',
+                            style: TextStyle(
+                              color: Color(0xFF73839B),
+                              fontSize: 11,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          TextSpan(
+                            text: ' *',
+                            style: TextStyle(
+                              color: Colors.red,
+                              fontSize: 11,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const DataColumn(label: Text('Reps')),
+                  const DataColumn(label: Text('RPE')),
+                  const DataColumn(label: Text('')),
                 ],
                 rows: List.generate(exercise.targetSets, (index) {
                   final setNumber = index + 1;
@@ -852,8 +876,8 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
                   return DataRow(
                     cells: [
                       DataCell(Text('$setNumber')),
-                      DataCell(_numberField(input.weight, decimal: true)),
-                      DataCell(_numberField(input.reps)),
+                      DataCell(_numberField(input.weight, decimal: true, hintText: 'kg')),
+                      DataCell(_numberField(input.reps, hintText: 'reps')),
                       DataCell(_numberField(input.rpe, decimal: true)),
                       DataCell(
                         IconButton(
@@ -890,13 +914,13 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 5),
       decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: .07),
+        color: Color(0xFF10264A).withValues(alpha: .07),
         borderRadius: BorderRadius.circular(20),
       ),
       child: Text(
         label,
         style: const TextStyle(
-          color: Colors.white70,
+          color: Color(0xFF536987),
           fontSize: 10,
           fontWeight: FontWeight.w700,
         ),
@@ -907,17 +931,19 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
   Widget _numberField(
     TextEditingController controller, {
     bool decimal = false,
+    String? hintText,
   }) {
     return SizedBox(
       width: decimal ? 70 : 56,
       child: TextField(
         controller: controller,
         keyboardType: TextInputType.numberWithOptions(decimal: decimal),
-        style: const TextStyle(color: Colors.white, fontSize: 13),
-        decoration: const InputDecoration(
+        style: const TextStyle(color: Color(0xFF10264A), fontSize: 13),
+        decoration: InputDecoration(
+          hintText: hintText,
           isDense: true,
-          contentPadding: EdgeInsets.symmetric(vertical: 8),
-          border: UnderlineInputBorder(),
+          contentPadding: const EdgeInsets.symmetric(vertical: 8),
+          border: const UnderlineInputBorder(),
         ),
       ),
     );
