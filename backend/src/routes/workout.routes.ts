@@ -128,7 +128,7 @@ router.delete(
   authenticateToken,
   async (req: AuthenticatedRequest, res: Response) => {
     const userId = req.user?.userId;
-    const { customPlanExerciseId } = req.params;
+    const customPlanExerciseId = String(req.params.customPlanExerciseId);
     if (!userId) return res.status(401).json({ message: 'Unauthorized.' });
     try {
       const deleted = await prisma.customPlanExercise.deleteMany({
