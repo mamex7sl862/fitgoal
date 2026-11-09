@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter/foundation.dart'; // for kIsWeb
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthInterceptor extends Interceptor {
@@ -201,16 +200,13 @@ class AccessTokenHeaderInterceptor extends Interceptor {
 }
 
 final dioProvider = Provider<Dio>((ref) {
-  // Automatically switch base URL depending on platform
-  final String baseUrl = kIsWeb
-      ? 'http://127.0.0.1:3000/api' // For Chrome / Web / Desktop
-      : 'http://10.0.2.2:3000/api'; // For Android Emulator
+  const String baseUrl = 'https://fitgoal-api-30nv.onrender.com/api';
 
   final dio = Dio(
     BaseOptions(
       baseUrl: baseUrl,
-      connectTimeout: const Duration(seconds: 5),
-      receiveTimeout: const Duration(seconds: 5),
+      connectTimeout: const Duration(seconds: 30),
+      receiveTimeout: const Duration(seconds: 30),
       headers: {'Content-Type': 'application/json'},
     ),
   );
